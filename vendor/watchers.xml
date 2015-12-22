@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="--sourcemap=none --no-cache --update $FileName$:$FileDir$\..\css\$FileNameWithoutExtension$.css" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" value="Compiles .scss files into .css files" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="scss" />
+    <option name="immediateSync" value="true" />
+    <option name="name" value="Documentation SCSS" />
+    <option name="output" value="$FileDir$\..\css\$FileNameWithoutExtension$.css" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="C:/Ruby22/bin/scss.bat" />
+    <option name="scopeName" value="Documentation" />
+    <option name="trackOnlyRoot" value="true" />
+    <option name="workingDir" value="$FileDir$" />
+    <envs />
+  </TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="--sourcemap=none --no-cache --update $FileName$:$FileDir$\..\css\$FileNameWithoutExtension$.css" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" value="Compiles .scss files into .css files" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="scss" />
+    <option name="immediateSync" value="true" />
+    <option name="name" value="Demo SCSS" />
+    <option name="output" value="$FileDir$\..\css\$FileNameWithoutExtension$.css" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="C:/Ruby22/bin/scss.bat" />
+    <option name="scopeName" value="Demo" />
+    <option name="trackOnlyRoot" value="true" />
+    <option name="workingDir" value="$FileDir$" />
+    <envs />
+  </TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="--output $ProjectFileDir$\dist\js --compile  $FileName$" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" value="Compiles .coffee files into .js files" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="coffee" />
+    <option name="immediateSync" value="true" />
+    <option name="name" value="CoffeeScript" />
+    <option name="output" value="$ProjectFileDir$\dist\js\$FileNameWithoutExtension$.js :$FileNameWithoutExtension$.map:$FileNameWithoutExtension$.js.map" />
+    <option name="outputFilters">
+      <array>
+        <FilterInfo>
+          <option name="description" value="coffee error format" />
+          <option name="name" value="coffee" />
+          <option name="regExp" value="$FILE_PATH$:$LINE$:$COLUMN$: $MESSAGE$$" />
+        </FilterInfo>
+      </array>
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="C:/Users/diversant/AppData/Roaming/npm/coffee.cmd" />
+    <option name="scopeName" value="Project Files" />
+    <option name="trackOnlyRoot" value="true" />
+    <option name="workingDir" value="$FileDir$" />
+    <envs />
+  </TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="$FileName$ --js_output_file $FileNameWithoutExtension$.min.js" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" value="Compress .js files" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="js" />
+    <option name="immediateSync" value="true" />
+    <option name="name" value="UglifyJS" />
+    <option name="output" value="$FileNameWithoutExtension$.min.js" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="D:/work/dev/rd-scripts/rd-parallax/vendor/compiler.jar" />
+    <option name="scopeName" value="JSMin" />
+    <option name="trackOnlyRoot" value="true" />
+    <option name="workingDir" value="$FileDir$" />
+    <envs />
+  </TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="--sourcemap=none --no-cache --update $FileName$:$FileDir$\..\..\dist\css\$FileNameWithoutExtension$.css" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" value="Compiles .scss files into .css files" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="scss" />
+    <option name="immediateSync" value="true" />
+    <option name="name" value="Sources SCSS" />
+    <option name="output" value="$FileDir$\..\..\dist\css\$FileNameWithoutExtension$.css" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="C:/Ruby22/bin/scss.bat" />
+    <option name="scopeName" value="Sources" />
+    <option name="trackOnlyRoot" value="true" />
+    <option name="workingDir" value="$FileDir$" />
+    <envs />
+  </TaskOptions>
+</TaskOptions>
+
