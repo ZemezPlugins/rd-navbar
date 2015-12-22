@@ -1,0 +1,120 @@
+/*
+* @subsection   RD Navbar Toggles
+*
+* @description  Describes style declarations for RD Navbar toggles
+*/
+
+@mixin toggle($size: 48px, $font-size: 24px, $color: #111) {
+  display: inline-block;
+  position: relative;
+  width: $size;
+  height: $size;
+  font-size: $font-size;
+  line-height: $size;
+  text-align: center;
+  cursor: pointer;
+  color: $color;
+}
+
+@mixin toggle-lines-to-arrow($size: 48px, $font-size: 24px, $color: #111) {
+  @include toggle($size, $font-size, $color);
+
+  span {
+    position: relative;
+    display: block;
+    margin: auto;
+    transition: .3s all ease;
+    @include transform(rotate(180deg));
+    &:before,
+    &:after {
+      @include transform-origin($font-size/14 center);
+      @include transform-origin($font-size/14 center);
+      content: "";
+      position: absolute;
+      left: 0;
+      top: (round($font-size / 6)) * -2;
+      transition: .3s all ease;
+    }
+
+    &:after {
+      top: (round($font-size / 6)) * 2;
+    }
+
+    &:after,
+    &:before,
+    & {
+      width: $font-size;
+      height: round($font-size / 6);
+      background-color: $color;
+      backface-visibility: hidden;
+      border-radius: 0;
+    }
+  }
+
+  &.active span {
+    @include transform(rotate(360deg));
+
+    &:before,
+    &:after {
+      top: 0;
+      width: $font-size/1.6;
+    }
+
+    &:before {
+      -webkit-transform: rotate3d(0, 0, 1, -40deg);
+      transform: rotate3d(0, 0, 1, -40deg);
+    }
+    &:after {
+      -webkit-transform: rotate3d(0, 0, 1, 40deg);
+      transform: rotate3d(0, 0, 1, 40deg);
+    }
+  }
+}
+
+@mixin toggle-icons-via-rotation($size: 48px, $font-size: 24px, $color: #111, $icon-before: '\f002', $icon-after: '\f00d') {
+  span {
+    @include toggle($size, $font-size, $color);
+    &, &:before, &:after {
+      transition: .3s all ease;
+    }
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:before {
+      content: $icon-before;
+      @include transform(rotate(0deg) scale(1));
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &:after {
+      content: $icon-after;
+      @include transform(rotate(-90deg) scale(0));
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &.active {
+    span {
+      &:before {
+        opacity: 0;
+        visibility: hidden;
+        @include transform(rotate(90deg) scale(0));
+      }
+
+      &:after {
+        @include transform(rotate(0deg) scale(1));
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+

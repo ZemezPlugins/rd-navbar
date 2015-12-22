@@ -1,0 +1,499 @@
+/*==================   RD Mobile Menu    =====================*/
+$light-theme: (
+        panel-background-color: $color-1,
+        panel-text-color: #FFF,
+        menu-background-color: #f9f9f9,
+        menu-item-color: #333,
+        menu-item-hover-color: #333,
+        menu-item-hover-background: #eee,
+        menu-item-active-color: #2D2D2D,
+        menu-item-active-background: #EEE
+);
+
+$rd-theme: $light-theme;
+$rd-menu-toggle-preset: "button-lines-arrow-2";
+
+$rd-mobilepanel-height: 56px;
+$rd-button-size: 48px;
+$rd-icon-size: 24px;
+$rd-menu-width: 300px;
+$rd-menu-width-mobile: 250px;
+
+.rd-mobilemenu {
+  position: fixed;
+  top: -$rd-mobilepanel-height;
+  left: 0;
+  bottom: -$rd-mobilepanel-height;
+  width: $rd-menu-width;
+  padding: $rd-mobilepanel-height 0 $rd-mobilepanel-height;
+  z-index: 9999996;
+  text-align: left;
+  color: map-get($rd-theme, menu-item-color);
+  background: map-get($rd-theme, menu-background-color);
+  @include transform(translateX(-$rd-menu-width));
+  overflow: hidden;
+
+  &.active {
+    @include transform(translateX(0));
+  }
+
+  .logo{
+    position: absolute;
+    top: $rd-mobilepanel-height;
+    left: 0;
+    right: 0;
+    padding: 20px 44px;
+    text-align: center;
+    background: darken($color-1, 10%);
+    @include box-sizing(border-box);
+
+    img{
+      max-height: 150px;
+    }
+
+    @media (max-width: 479px) {
+
+    }
+  }
+
+  .panel{
+    top: $rd-mobilepanel-height + 10;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    padding: 0 18px;
+    z-index: 1;
+    color: #FFF;
+  }
+
+  .copyright{
+    text-align: center;
+    position: absolute;
+    padding: 8px;
+    border-top: 1px solid #BDBDBD;
+    bottom: $rd-mobilepanel-height;
+    left: 0;
+    right: 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    top: 0;
+    right: -10px;
+    bottom: 0;
+    @include box-shadow(-5px 0 10px 0 rgba(0, 0, 0, .1));
+    z-index: 1;
+  }
+
+  @media (max-width: 479px) {
+    width: $rd-menu-width-mobile;
+    @include transform(translateX(-$rd-menu-width-mobile));
+  }
+}
+
+.rd-mobilemenu_ul::-webkit-scrollbar {
+  background: #eee;
+  width: 8px;
+}
+
+.rd-mobilemenu_ul::-webkit-scrollbar-thumb {
+  background: #757575;
+}
+
+.rd-mobilemenu_ul {
+  position: absolute;
+  top: $rd-mobilepanel-height + 180px + 16px;
+  bottom: $rd-mobilepanel-height + 48px;
+  margin: 0;
+  left: 0;
+  right: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  max-height: 100%;
+  overflow: auto;
+
+  a {
+    display: block;
+    padding: 14px 25px 16px;
+
+    &:hover, &.active, &.opened {
+      background: map-get($rd-theme, menu-item-hover-background);
+      color: map-get($rd-theme, menu-item-hover-color);
+    }
+  }
+
+  ul{
+    margin: 0;
+  }
+
+  ul a {
+    padding-left: 50px;
+
+    &.focus{
+      color: $color-1;
+    }
+  }
+
+  ul ul a {
+    padding-left: 60px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    height: 20px;
+  }
+}
+
+.rd-mobilepanel_title {
+  position: absolute;
+  left: 64px;
+  width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  right: 300px;
+  bottom: 61px;
+  color: map-get($rd-theme, panel-text-color);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 1599px) {
+    right: 64px;
+  }
+
+  @media (min-width: 1068px) and (max-width: 1301px) {
+    width: 940px;
+  }
+
+  @media (min-width: 878px) and (max-width: 1067px) {
+    width: 748px;
+  }
+
+  @media (max-width: 877px) {
+    width: auto;
+  }
+
+  @media (max-width: 479px) {
+    span{
+      display: none;
+    }
+  }
+}
+
+.rd-mobilepanel {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 256px;
+  background: map-get($rd-theme, panel-background-color);
+  color: map-get($rd-theme, panel-text-color);
+  z-index: 9999997;
+
+  &.fixed {
+    position: fixed;
+    height: 56px;
+    @include box-shadow(-3px 3px 6px 0 rgba(0, 0, 0, .1));
+
+    .rd-mobilepanel_title {
+      transform: translateY(50.25px);
+      font-size: 24px;
+    }
+  }
+
+  .panel{
+    position: absolute;
+    right: 10px;
+    bottom: 14px;
+    @include transition(.3s all cubic-bezier(0.2, 1, 0.3, 1));
+  }
+}
+
+.page-content.active{
+  .panel{
+    right: 315px;
+  }
+}
+
+body.navbar-stickup {
+  padding-top: 256px;
+}
+
+body.navbar-fixed {
+  padding-top: 56px;
+}
+
+.page-content .page{
+  position: relative;
+  z-index: 9999996;
+}
+
+.rd-mobilemenu, .page-content .page, .page-content .rd-mobilepanel, .page-content .rd-mobilepanel_toggle {
+  @include transition(#{1s all cubic-bezier(0.2, 1, 0.3, 1), 0s height});
+  transition-property: transform;
+}
+
+.page-content{
+  &.active {
+    .page, .rd-mobilepanel, .rd-mobilepanel_toggle {
+      @include transform(translateX($rd-menu-width - 1));
+    }
+  }
+
+  @media (max-width: 479px) {
+    &.active {
+      .page, .rd-mobilepanel, .rd-mobilepanel_toggle {
+        @include transform(translateX($rd-menu-width-mobile - 1));
+      }
+    }
+  }
+}
+
+//===========   Mobilepanel Toggle Presets   ==============
+
+// Hamburger
+@mixin button-lines() {
+  span {
+    position: relative;
+    display: block;
+    margin: auto;
+    @include transition(all .3s ease);
+
+    &:after,
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: (round($rd-icon-size / 6)) * -2;
+      @include transition(all .3s ease);
+    }
+
+    &:after {
+      top: (round($rd-icon-size / 6)) * 2;
+    }
+
+    &:after,
+    &:before,
+    & {
+      width: $rd-icon-size;
+      height: round($rd-icon-size / 6);
+      background-color: map-get($rd-theme, panel-text-color);
+      backface-visibility: hidden;
+      @include border-radius(2px);
+    }
+  }
+}
+
+// Hamburger to Cross
+@mixin button-lines__cross-1() {
+  &.active span {
+    background: transparent;
+
+    &:before, &:after {
+      @include transform-origin(50% 50%);
+      top: 0;
+    }
+
+    &:before {
+      @include transform(rotate(45deg));
+    }
+    &:after {
+      @include transform(rotate(-45deg));
+    }
+  }
+}
+
+@mixin button-lines__cross-2() {
+  span {
+    &:before, &:after {
+      -webkit-transition-duration: 0.3s, 0.3s;
+      transition-duration: 0.3s, 0.3s;
+      -webkit-transition-delay: 0.3s, 0s;
+      transition-delay: 0.3s, 0s;
+      -webkit-transition-property: top, -webkit-transform;
+      transition-property: top, transform;
+    }
+  }
+
+  &.active span {
+    transition: background .3s 0s ease;
+    background: transparent;
+
+    &:before, &:after {
+      top: 0;
+      -webkit-transition-delay: 0s, 0.3s;
+      transition-delay: 0s, 0.3s;
+    }
+    &:before {
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    &:after {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+@mixin button-lines__cross-3() {
+  span {
+    &:before, &:after {
+      -webkit-transition-duration: 0.3s, 0.3s;
+      transition-duration: 0.3s, 0.3s;
+      -webkit-transition-delay: 0.3s, 0s;
+      transition-delay: 0.3s, 0s;
+      -webkit-transition-property: top, -webkit-transform;
+      transition-property: top, transform;
+    }
+  }
+
+  &.active span {
+    @include transform(rotate(180deg));
+    transition: background .3s 0s ease;
+    background: transparent;
+
+    &:before, &:after {
+      top: 0;
+      -webkit-transition-delay: 0s, 0.3s;
+      transition-delay: 0s, 0.3s;
+    }
+    &:before {
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    &:after {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// Hamburger to Arrow
+@mixin button-lines__arrow-1() {
+  span {
+    &:before,
+    &:after {
+      @include transform-origin($rd-icon-size/14 center);
+    }
+  }
+
+  &.active span {
+    &:before,
+    &:after {
+      top: 0;
+      width: $rd-icon-size/1.6;
+    }
+
+    &:before {
+      @include transform(rotate(-40deg));
+    }
+    &:after {
+      @include transform(rotate(40deg));
+    }
+  }
+}
+
+// Hamburger to Arrow (Material Design)
+@mixin button-lines__arrow-2() {
+  span {
+    @include transform(rotate(180deg));
+    &:before,
+    &:after {
+      @include transform-origin($rd-icon-size/14 center);
+      @include transform-origin($rd-icon-size/14 center);
+    }
+  }
+
+  &.active span {
+    @include transform(rotate(360deg));
+
+    &:before,
+    &:after {
+      top: 0;
+      width: $rd-icon-size/1.6;
+    }
+
+    &:before {
+      -webkit-transform: rotate3d(0, 0, 1, -40deg);
+      transform: rotate3d(0, 0, 1, -40deg);
+    }
+    &:after {
+      -webkit-transform: rotate3d(0, 0, 1, 40deg);
+      transform: rotate3d(0, 0, 1, 40deg);
+    }
+  }
+}
+
+// Hamburger to Minus
+@mixin button-lines__minus-1() {
+  span {
+    &:before,
+    &:after {
+      @include transition(all .3s ease);
+    }
+  }
+
+  &.active span {
+    &:before,
+    &:after {
+      top: 0;
+    }
+  }
+}
+
+//===============   Mobilepanel Toggle   =================
+.rd-mobilepanel_toggle {
+  position: fixed;
+  top: 4px;
+  left: 8px;
+  width: $rd-button-size;
+  height: $rd-button-size;
+  z-index: 9999998;
+
+  @if ($rd-menu-toggle-preset == button-lines-cross-1) {
+    @include button-lines();
+    @include button-lines__cross-1();
+  }
+
+  @if ($rd-menu-toggle-preset == button-lines-cross-2) {
+    @include button-lines();
+    @include button-lines__cross-2();
+  }
+
+  @if ($rd-menu-toggle-preset == button-lines-cross-3) {
+    @include button-lines();
+    @include button-lines__cross-3();
+  }
+
+  @if ($rd-menu-toggle-preset == button-lines-arrow-1) {
+    @include button-lines();
+    @include button-lines__arrow-1();
+  }
+
+  @if ($rd-menu-toggle-preset == button-lines-arrow-2) {
+    @include button-lines();
+    @include button-lines__arrow-2();
+  }
+
+  @if ($rd-menu-toggle-preset == button-lines-minus-1) {
+    @include button-lines();
+    @include button-lines__minus-1();
+  }
+}
+
+.nav {
+  display: none;
+}
+
+@media (max-width: 359px) {
+  .rd-mobilepanel_title {
+    font-size: 18px;
+  }
+}

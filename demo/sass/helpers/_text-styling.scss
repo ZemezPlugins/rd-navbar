@@ -1,0 +1,47 @@
+/*
+* @subsection   Text Styling
+*/
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.thin {
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular{
+  font-weight: 400;
+}
+
+.medium{
+  font-weight: 500;
+}
+
+.sbold{
+  font-weight: 600;
+}
+
+.bold, strong {
+  font-weight: 700;
+}
+
+.ubold {
+  font-weight: 900;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}

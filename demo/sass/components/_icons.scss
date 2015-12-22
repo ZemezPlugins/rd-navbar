@@ -1,0 +1,119 @@
+/*
+* @subsection   Icons
+*/
+
+$icon-xs-size: 40px;
+$icon-xs-fz: 28px;
+
+$icon-sm-size: 45px;
+$icon-sm-fz: 43px; 
+
+$icon-md-size: 60px;
+$icon-md-fz: 48px;
+
+$icon-lg-size: 108px;
+$icon-lg-fz: 40px;
+
+$icon-xl-size: $icon-lg-size * 1.15;
+$icon-xl-fz: $icon-lg-fz * 1.15;
+
+// Icon General Styles
+.icon {
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+}
+
+
+// Icon Sizing Styles
+.icon-xs{
+  width: $icon-xs-size;
+  height: $icon-xs-size;
+  line-height: $icon-xs-size;
+  font-size: $icon-xs-fz;
+}
+
+.icon-sm {
+  width: $icon-sm-size;
+  height: $icon-sm-size;
+  line-height: $icon-sm-size;
+  font-size: $icon-sm-fz;
+}
+
+.icon-md {
+  width: $icon-md-size;
+  height: $icon-md-size;
+  line-height: $icon-md-size;
+  font-size: $icon-md-fz;
+}
+
+.icon-lg {
+  width: $icon-lg-size;
+  height: $icon-lg-size;
+  line-height: $icon-lg-size;
+  font-size: $icon-lg-fz;
+}
+
+.icon-xl{
+  width: $icon-xl-size;
+  height: $icon-xl-size;
+  line-height: $icon-xl-size;
+  font-size: $icon-xl-fz;
+}
+
+
+// Icon Appearance Styles
+.icon-default {
+  color: darken(saturate(adjust_hue($contrast, 0), 0.5076142131979677%), 8.039215686274503%);
+}
+
+.icon-primary {
+  color: #FFF;
+  background: $primary;
+}
+
+.icon-secondary-1 {
+  color: #FFF;
+  background: $secondary-1;
+}
+
+.icon-secondary-2 {
+  color: #FFF;
+  background: $secondary-2;
+}
+
+.icon-secondary-3 {
+  color: #FFF;
+  background: $secondary-3;
+}
+
+// Social Icons Styles
+.icon.fa-facebook {
+  color: #FFF;
+  background: #3B579D;
+
+  &:hover {
+    background: darken(#3B579D, 5%);
+  }
+}
+
+.icon.fa-twitter {
+  color: #FFF;
+  background: #5EA9DD;
+
+  &:hover {
+    background: darken(#5EA9DD, 5%);
+  }
+}
+
+.icon.fa-google-plus {
+  color: #FFF;
+  background: #DF4A32;
+
+  &:hover {
+    background: darken(#DF4A32, 5%);
+  }
+}
+
+
+

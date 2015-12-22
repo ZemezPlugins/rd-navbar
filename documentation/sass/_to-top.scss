@@ -1,0 +1,49 @@
+/*==================     ToTop     ======================*/
+.toTop {
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  line-height: 52px;
+  color: #fff;
+  background: $color-1;
+  border-radius: 50%;
+  @include box-shadow(0 6px 6px 0 rgba(#000, .15));
+  @include transform(translateY(100px));
+  @include transition(.3s all cubic-bezier(0.2, 1, 0.3, 1));
+
+  position: fixed; 
+  right: 40px;
+  bottom: 40px;
+
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  z-index: 9999999;
+
+  &:hover {
+    color: #fff;
+    background: darken($color-1, 5%);
+    text-decoration: none;
+  }
+
+  &.active{
+    @include transform(translateY(0px));
+  }
+}
+
+@media (max-width: 479px) {
+  .toTop{
+    width: 48px;
+    height: 48px;
+    line-height: 44px;
+    bottom: 11px;
+    right: 11px;
+  }
+}
+
+.mobile .toTop, 
+.tablet .toTop{
+	display: none!important; 
+}
+
+

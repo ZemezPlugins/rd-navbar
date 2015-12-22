@@ -1,0 +1,114 @@
+/*
+* @subsection   RD Navbar Collapse
+*
+* @description  Describes style declarations for RD Navbar collapse
+*/
+
+.rd-navbar-collapse,
+.rd-navbar-collapse-toggle{
+  display: none;
+}
+
+.rd-navbar-static{
+  .rd-navbar-inner{
+    max-width: 1200px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .rd-navbar-collapse{
+    display: block;
+    float: right;
+    margin-left: -15px;
+    margin-top: 23px;
+
+    li{
+      display: inline-block;
+      margin-left: 15px;
+
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+.rd-navbar-fixed{
+  .rd-navbar-collapse{
+    display: block;
+    @extend %rd-navbar-transition;
+    text-align: left;
+    position: fixed;
+    top: 4px;
+    right: 4px;
+    color: $rd-navbar-contrast-color;
+    padding: 48px 0 8px;
+    font-size: 16px;
+    line-height: 26px;
+    z-index: 19;
+    width: 180px;
+    box-shadow: 0 0 0 0 nth($rd-navbar-shadow-medium, 5);
+    visibility: hidden;
+    overflow: hidden;
+    transition: .3s box-shadow ease .2s;
+
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: darken($rd-navbar-white-color, 3%);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      @include transform(scale(0));
+      @extend %rd-navbar-transition;
+    }
+
+    li{
+      position: relative;
+      opacity: 0;
+      transition: .3s all ease 0s;
+    }
+
+ 
+    > li > a{
+      display: block;
+      padding: 11px 16px;
+
+      &:hover{
+        background: lighten($rd-navbar-contrast-color, 75%);
+      }
+    }
+
+    &.active{
+      visibility: visible;
+      box-shadow: $rd-navbar-shadow-medium;
+
+      li{
+        transition: .3s all ease .2s;
+        opacity: 1;
+      }
+
+      &:before{
+        background: $rd-navbar-white-color;
+        @include transform(scale(12));
+      }
+    }
+  }
+
+  .rd-navbar-collapse-toggle{
+    display: block;
+    position: fixed;
+    top: 4px;
+    right: 4px;
+    font-family: 'Material Icons';
+    width: 48px;
+    height: 48px;
+    @include toggle-icons-via-rotation(48px, 28px, $rd-navbar-contrast-color, '\e5d4', '\e5cd');
+    z-index: 20;
+  }
+}

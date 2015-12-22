@@ -1,0 +1,270 @@
+/*
+* @subsection   RD Navbar Toggles
+*
+* @description  Describes style declarations for RD Navbar navigation
+*/
+
+.rd-navbar-cart-floating{
+  display: none;
+}
+
+.rd-navbar-cart-toggle {
+  @include toggle-icons-via-rotation(48px, 28px, $rd-navbar-contrast-color, '\e8cb', '\e5cd');
+  font-family: 'Material Icons';
+}
+
+.rd-navbar-cart{
+  @extend %rd-navbar-transition;
+  display: none;
+  text-align: left;
+  color: $rd-navbar-default-color;
+  background: $rd-navbar-white-color;
+  box-shadow: $rd-navbar-shadow-ambient, $rd-navbar-shadow-medium;
+  height: 328px;
+  width: 100%;
+
+  &:before{
+    content: '';
+    position: absolute;
+    height: 32px;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: linear-gradient($rd-navbar-white-color, rgba($rd-navbar-white-color, 0));
+    z-index: 1;
+  }
+
+  &-items{
+    overflow: auto;
+    max-height: 100%;
+    height: 100%;
+    padding: 16px 0;
+
+    &::-webkit-scrollbar{
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+      background: $rd-navbar-default-color;
+    }
+  }
+
+  .rd-navbar-cart-item{
+    &__preview{
+      border-radius: 50%;
+    }
+  }
+
+  .rd-navbar-cart-item{
+    position: relative;
+    padding: 8px 0;
+    &__left, &__body, &__remove{
+      position: relative;
+      display: table-cell;
+    }
+
+    &__left{
+      padding: 0 16px;
+      img{
+        max-width: none;
+      }
+    }
+
+    &__body{
+      vertical-align: middle;
+      width: 100%;
+    }
+
+    &__title{
+      font-size: 16px;
+      line-height: 26px;
+      color: $rd-navbar-contrast-color;
+    }
+
+    &__counter{
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    &__remove{
+      vertical-align: middle;
+      width: 56px;
+      font-size: 24px;
+      padding: 0 16px;
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 88px;
+      display: block;
+      height: 1px;
+      background: rgba($rd-navbar-default-color, .2);
+    }
+  }
+}
+
+.rd-navbar-static{
+  .rd-navbar-cart-wrap{
+    position: relative;
+    float: right;
+    margin-top: 12px;
+    margin-left: 20px;
+  }
+
+  .rd-navbar-cart-floating{
+    display: block;
+
+    .rd-navbar-cart-buy{
+      display: none;
+    }
+  }
+
+  .rd-navbar-cart{
+    display: block;
+    position: absolute;
+    width: 320px;
+    top: 100%;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    @include transform(translateY(30px));
+    z-index: 2;
+
+    &.active{
+      visibility: visible;
+      opacity: 1;
+      @include transform(translateY(0));
+    }
+  }
+
+  .rd-navbar-cart-buy{
+    @extend %rd-navbar-transition;
+    position: relative;
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 56px;
+    text-align: center;
+    color: $rd-navbar-white-color;
+    background: $rd-navbar-accent-color-2;
+
+    &:hover{
+      background: lighten($rd-navbar-accent-color-2, 5%);
+    }
+
+    &:before{
+      font-weight: 400;
+      font-size: 24px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+}
+
+.rd-navbar-fixed{
+  .rd-navbar-cart{
+    display: block;
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding-bottom: 56px;
+    z-index: 19;
+
+    &.active{
+      @include transform(translateY(-100%));
+    }
+
+    .rd-navbar-cart-buy{
+      display: none;
+    }
+  }
+
+  .rd-navbar-cart-floating{
+    display: block;
+    @extend %rd-navbar-transition;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 20;
+    color: #FFF;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: $rd-navbar-shadow-large, $rd-navbar-shadow-ambient;
+    width: 56px;
+    height: 56px;
+    outline: 1px solid transparent;
+    backface-visibility: hidden;
+
+    &:before{
+      @extend %rd-navbar-transition;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: $rd-navbar-accent-color;
+      @include transform(translate(-50%, -50%));
+    }
+
+    .rd-navbar-cart-buy{
+      @extend %rd-navbar-transition;
+      position: relative;
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 56px;
+      opacity: 0;
+      visibility: hidden;
+
+      &:before{
+        font-weight: 400;
+        font-size: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    }
+
+    .rd-navbar-cart-toggle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%));
+
+      span {
+        color: #FFF;
+        height: 56px;
+        line-height: 56px;
+      }
+    }
+
+    &.active{
+      right: 0;
+      bottom: 0;
+      border-radius: 0;
+      width: 100%;
+
+      &:before{
+        @include transform(translate(-50%, -50%) scale(20));
+        background: $rd-navbar-accent-color-2;
+      }
+
+      .rd-navbar-cart-buy{
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .rd-navbar-cart-toggle{
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+  }
+}

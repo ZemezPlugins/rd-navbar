@@ -1,0 +1,101 @@
+/*
+* @subsection   Buttons
+*/
+
+$btn-xs-height: 30px; // < 40px
+$btn-xs-size: 14px;
+
+$btn-sm-height: $btn-xs-height * 1.33; // >= 40px
+$btn-sm-size: $btn-xs-size * 1.33;
+
+$btn-md-height: $btn-sm-height * 1.25; // >= 50px
+$btn-md-size: $btn-sm-size * 1.25;
+
+$btn-lg-height: $btn-md-height * 1.2; // >= 60px
+$btn-lg-size: $btn-md-size * 1.2;
+
+$btn-xl-height: $btn-lg-height * 1.16; // >= 70px
+$btn-xl-size: $btn-lg-size * 1.16;
+
+$btn-group-offset: 10px;
+
+// Button General Styles
+.btn {
+  display: inline-block;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Button Layout Styles
+.btn-xs {
+  padding: ceil(($btn-xs-height - ($btn-xs-size * 1.2)) / 2);
+  font-size: ceil($btn-xs-size);
+}
+
+.btn-sm {
+  padding: ceil(($btn-sm-height - ($btn-sm-size * 1.2)) / 2);
+  font-size: ceil($btn-sm-size);
+}
+
+.btn-md {
+  padding: ceil(($btn-md-height - ($btn-md-size * 1.2)) / 2);
+  font-size: ceil($btn-md-size);
+}
+
+.btn-lg {
+  padding: ceil(($btn-lg-height - ($btn-lg-size * 1.2)) / 2);
+  font-size: ceil($btn-lg-size);
+}
+
+.btn-xl {
+  padding: ceil(($btn-xl-height - ($btn-xl-size * 1.2)) / 2);
+  font-size: ceil($btn-xl-size);
+}
+
+// Button Appearance Styles
+.btn-default {
+  color: $contrast;
+  background: $default;
+
+  &:hover {
+    color: $contrast;
+    background: lighten($default, 5%);
+  }
+
+  &:active {
+    color: $contrast;
+    background: darken($default, 5%);
+  }
+}
+
+.btn-primary {
+  color: #fff;
+  background: $primary;
+
+  &:hover {
+    color: #fff;
+    background: lighten($primary, 5%);
+  }
+
+  &:active {
+    color: #fff;
+    background: darken($primary, 5%);
+  }
+}
+
+
+// Button Group Styles
+.btn-group {
+  @include transform(translateY(-$btn-group-offset));
+  margin-bottom: -$btn-group-offset;
+  margin-left: -$btn-group-offset;
+
+  .btn {
+    margin-top: $btn-group-offset;
+    margin-left: $btn-group-offset;
+  }
+}

@@ -1,0 +1,109 @@
+/*
+* @section      Normalize
+*
+* @description  Resets default browser styling
+*
+* @link         http://github.com/necolas/normalize.css
+* @license      MIT license - http://opensource.org/licenses/MIT
+* @version      3.0.3
+* @revision     1.0
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button, input, textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: top;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, main, time, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button, input, textarea, select {
+  display: inline-block;
+  -webkit-appearance: none;
+  outline: none;
+  color: inherit;
+  overflow: visible;
+  background-color: rgba(#000, 0);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+button,
+input[type='button'],
+input[type='submit'] {
+  cursor: pointer;
+}
+
+/*
+* @bugfix input text-overflow padding ignore
+* @affected lt IE11
+*/
+.lt-ie11 {
+  input {
+    border-left: 1px solid rgba(#000, 0);
+    border-right: 1px solid rgba(#000, 0);
+    border-bottom-left-radius: 1px!important;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a,
+a[href^="tel:"],
+a[href^="callto:"] {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a, button, input {
+  transition: .3s all ease;
+}

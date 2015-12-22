@@ -1,0 +1,131 @@
+﻿/*
+* @section      TM Grid System
+*
+* @description  A powerful and flexible css flex grid system
+*
+* @author       Evgeniy Gusarov
+* @link         https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
+* @version      1.0.0
+*/
+
+@import "_tm-grid-builder.scss";
+
+$column-count: 12;
+$column-width: 70px;
+$gutter-width: 30px;
+
+$row-ws: $gutter-width * 2;
+
+$container-xs: 300px;
+$container-sm: 720px + $gutter-width;
+$container-md: 940px + $gutter-width;
+$container-lg: $column-count*$column-width + $gutter-width*($column-count);
+
+.container {
+  @include make-container($gutter-width);
+  min-width: $container-xs;
+  max-width: $screen-xs-min;
+
+  @media (min-width: $screen-sm-min) {
+    max-width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    max-width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    max-width: $container-lg;
+  }
+}
+
+.container-fluid {
+  @include make-container($gutter-width);
+}
+
+.row {
+  @include make-row($gutter-width);
+}
+
+[class*='col-'] {
+  @include make-col($gutter-width);
+}
+
+html.lt-ie10 * + [class*='col-'],
+html.lt-ie10 * + .row,
+* + [class*='col-'],
+* + .row {
+  margin-top: $row-ws;
+}
+
+html.lt-ie10 .row-no-gutter, .row-no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+
+  > [class*='col'] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  > * + [class*='col'] {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  * + [class*='col-xs-'] {
+    margin-top: 0;
+  }
+
+  .row {
+    @include make-flex();
+    @include flex(0 1 auto);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+  }
+
+  .row > [class*='col'] {
+    @include flex(0 0 auto);
+    @include flex-basis(100%);
+  }
+
+  @include make-grid-system("xs");
+}
+
+@media (min-width: $screen-sm-min) {
+  * + [class*='col-sm-'] {
+    margin-top: 0;
+  }
+
+  @include make-grid-system("sm");
+}
+
+@media (min-width: $screen-md-min) {
+  * + [class*='col-md-'] {
+    margin-top: 0;
+  }
+
+  @include make-grid-system("md");
+}
+
+@media (min-width: $screen-lg-min) {
+  * + [class*='col-lg-'] {
+    margin-top: 0;
+  }
+
+  @include make-grid-system("lg");
+}
+
+html.lt-ie10 {
+  .row > {
+    @include make-fallback($column-count);
+  }
+}
+
+
+
+
+
+
+
+
+
+

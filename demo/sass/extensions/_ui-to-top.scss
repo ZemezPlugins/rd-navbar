@@ -1,0 +1,50 @@
+/*
+* @subsection   ToTop
+* @license      MIT license - http://opensource.org/licenses/MIT
+* @version      1.0.0
+*/
+.ui-to-top{
+  display: none;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 46px;
+  color: #FFF;
+  background: $primary;
+  border-radius: 50%;
+  box-shadow: $box-shadow-ambient, $box-shadow-key-light;
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  z-index: 20;
+
+  @include transform(translateY(100px));
+
+  &:hover {
+    color: #FFF;
+    background: lighten($primary, 5%);
+    text-decoration: none;
+  }
+
+  &.active{
+    @include transform(translateY(0));
+  }
+}
+
+.mobile .ui-to-top,
+.tablet .ui-to-top {
+  display: none !important;
+}
+
+@media (min-width: $screen-md-min){
+  .ui-to-top {
+    display: block;
+    right: 40px;
+    bottom: 40px;
+  }
+}
+
+

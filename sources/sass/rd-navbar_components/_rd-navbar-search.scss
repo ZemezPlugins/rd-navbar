@@ -1,0 +1,97 @@
+/*
+* @subsection   RD Navbar Search
+*
+* @description  Describes style declarations for RD Navbar search
+*/
+
+.rd-navbar-search,
+.rd-navbar-search-toggle{
+  display: none;
+}
+
+.rd-navbar-static{
+  .rd-navbar-search{
+    display: block;
+
+    form{
+      position: relative;
+      input{
+        display: block;
+        font-size: 18px;
+        line-height: 24px;
+        padding: 12px 56px 12px 16px;
+        height: 48px;
+        color: $rd-navbar-white-color;
+        background: lighten($rd-navbar-contrast-color, 5%);
+      }
+
+      button[type="submit"]{
+        position: absolute;
+        font-size: 22px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        top: 12px;
+        right: 16px;
+
+        &:hover{
+          color: $rd-navbar-white-color;
+        }
+      }
+    }
+  }
+}
+
+.rd-navbar-fixed{
+  .rd-navbar-search-toggle{
+    display: block;
+    position: fixed;
+    top: 4px;
+    right: 56px;
+    font-family: 'Material Icons';
+    width: 48px;
+    height: 48px;
+    @include toggle-icons-via-rotation(48px, 28px, $rd-navbar-contrast-color, '\e8b6', '\e5cd');
+    z-index: 18;
+  }
+
+  .rd-navbar-search{
+    display: block;
+
+    .form-group{
+      position: fixed;
+      top: 0;
+      padding-top: 4px;
+      left: 56px;
+      right: 112px;
+      height: 56px;
+      background: $rd-navbar-white-color;
+      z-index: 17;
+      @extend %rd-navbar-transition;
+      visibility: hidden;
+      opacity: 0;
+
+      input{
+        width: 100%;
+        height: 46px;
+        display: block;
+        font-size: 22px;
+        line-height: 46px;
+      }
+    }
+
+    &.active{
+      .form-group{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    form{
+      button[type="submit"]{
+        display: none;
+      }
+    }
+  }
+}

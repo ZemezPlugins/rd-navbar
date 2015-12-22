@@ -1,0 +1,124 @@
+/*==================== Stuck ====================*/
+.stuck {
+	@include transition(transform .3s ease);
+    padding-top: 123px;
+    padding-bottom: 69px;
+	background: $color-1;
+
+	.container {
+		position: relative;
+	}
+
+	.select_wrap {
+		position: absolute;
+		top: 19px;
+		right: 0;
+	}
+
+	.title {
+		padding-right: 200px;
+	}
+
+	.section-title {
+		display: inline-block;
+
+		&:after {
+			content: "\f105";
+			font-family: FontAwesome;
+			padding: 0 10px;
+		}
+
+		& + .chapter-title {
+			display: inline-block;
+		}
+	}
+
+	.section-title, .chapter-title {
+    	font-size: 54px;
+    	line-height: 64px;
+    	font-weight: 500;
+	}
+
+	@media (max-width: 1299px) {
+	     .container {
+	     	width: 100%;
+	     	padding: 0 0 0 64px;
+	     }
+
+		.title {
+			padding-right: 250px;
+		}
+
+		.select_wrap {
+			right: 50px;
+		}
+	} 
+
+	@media (max-width: 1199px) {
+		padding-top: 80px;
+		padding-bottom: 60px;
+
+		.section-title, .chapter-title {
+			font-size: 46px;
+			line-height: 46px;
+		}
+
+		.select_wrap {
+			top: 0;
+		}
+	} 
+
+	@media (max-width: 979px) {
+		padding-top: 60px;
+		padding-bottom: 60px;
+
+		.section-title, .chapter-title {
+			font-size: 36px;
+			line-height: 36px;
+		}
+	} 
+
+	@media (max-width: 767px) {
+		padding-top: 40px;
+		padding-bottom: 40px;
+
+		.title {
+			padding-right: 0;
+		}
+
+		.section-title, .chapter-title {
+			font-size: 28px;
+			line-height: 28px;
+		}
+
+		.select_wrap {
+			position: static;
+			margin-top: 20px;
+		}
+
+		.section-title { display: none; }
+	}
+}
+
+.isStuck{
+  @include card(1);
+}
+
+.isStuck, .chapter {
+	padding-top: 19px;
+	padding-bottom: 20px;
+
+	.section-title, .chapter-title {
+		font-size: 26px;
+		line-height: 26px;
+	}
+
+	.select_wrap { display: none; }
+
+	@media (max-width: 767px) {
+		.section-title, .chapter-title {
+			font-size: 26px;
+			line-height: 26px;
+		}
+	}
+}

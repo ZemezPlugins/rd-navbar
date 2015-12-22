@@ -1,0 +1,57 @@
+{
+	"id":"howtouse",
+	"translations":
+	{
+		"ru":"Как использовать скрипт?"
+	},
+  "articles": [
+	  {
+		  "id": "general",
+		  "translations": {
+			  "ru": "Общие принципы"
+		  }
+	  },
+	  {
+		  "id": "classes",
+		  "translations": {
+			  "ru": "Карта классов"
+		  }
+	  },
+	  {
+		  "id": "layouts",
+		  "translations": {
+			  "ru": "Настройка лейаутов"
+		  }
+	  },
+	  {
+		  "id": "stickup",
+		  "translations": {
+			  "ru": "Настройка прилипающей панели"
+		  }
+	  },
+	  {
+		  "id": "navigation",
+		  "translations": {
+			  "ru": "Настройка навигации"
+		  }
+	  },
+	  {
+		  "id": "toggles",
+		  "translations": {
+			  "ru": "Настройка переключателей (тоглов)"
+		  }
+	  },
+	  {
+		  "id": "links",
+		  "translations": {
+			  "ru": "Настройка линковщика"
+		  }
+	  },
+	  {
+		  "id": "onepage",
+		  "translations": {
+			  "ru": "Настройка одностраничной навигации"
+		  }
+	  }
+  ]
+}

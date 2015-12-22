@@ -1,0 +1,60 @@
+/*
+* @subsection   RD Navbar Brand
+*
+* @description  Describes style declarations for RD Navbar brand
+*/
+
+.rd-navbar-brand{
+  display: none;
+  color: $rd-navbar-contrast-color;
+}
+
+.rd-navbar-static{
+  .rd-navbar-brand{
+    display: inline-block;
+    float: left;
+    > *{
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    > img{
+      margin-right: 10px;
+    }
+
+    > a{
+      font-size: 36px;
+      line-height: 48px;
+
+      span{
+        display: none;
+      }
+    }
+  }
+}
+
+.rd-navbar-fixed{
+  .rd-navbar-brand{
+    display: block;
+    text-align: left;
+    position: fixed;
+    top: 4px;
+    left: 56px;
+    right: 112px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 22px;
+    line-height: 46px;
+    height: 48px;
+    z-index: 17;
+
+    img{
+      display: none;
+    }
+
+    a{
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,253 @@
+//==========================================================
+//                        MIXINS
+//==========================================================
+
+// Note: Some of described mixins in this file requires the ie conditional comments
+//
+// For IE < 9
+// <!--[if lt IE 9]>
+//    <html class='lt-ie9'>
+// <![endif]-->
+//
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin clip($x1, $x2, $y1, $y2) {
+  clip: rect($y1, $x2, $y2, $x1);
+}
+
+// Opacity
+@mixin opacity($opacity) {
+  opacity: $opacity;
+
+  .lt-ie9 & {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity})";
+    filter: alpha(opacity=$opacity*100);
+  }
+}
+
+// Background-rgba
+@mixin background($rgb, $opacity) {
+  background: rgba($rgb, $opacity);
+
+  .lt-ie9 & {
+    background: none;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str(rgba($rgb, $opacity))}', endColorstr='#{ie-hex-str(rgba($rgb, $opacity))}')";
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str(rgba($rgb, $opacity))}', endColorstr='#{ie-hex-str(rgba($rgb, $opacity))}');
+    zoom: 1;
+  }
+}
+
+// Animation
+@mixin animation($anim) {
+  -webkit-animation: $anim;
+  animation: $anim;
+}
+
+// Transform Origin
+@mixin transform-origin($trfm-o) {
+  -webkit-transform-origin: $trfm-o;
+  transform-origin: $trfm-o;
+}
+
+// Transform
+@mixin transform($trfm) {
+  -webkit-transform: $trfm;
+  transform: $trfm;
+}
+
+// Triangle
+@mixin triangle($dir, $w, $h, $clr) {
+  width: 0;
+  height: 0;
+  border-style: solid;
+
+  @if $dir == top {
+    border-width: 0 ceil($w/2) $h ceil($w/2);
+    border-color: transparent transparent $clr transparent;
+  } @else if $dir == bottom {
+    border-width: $h ceil($w/2) 0 ceil($w/2);
+    border-color: $clr transparent transparent transparent;
+  } @else if $dir == left {
+    border-width: ceil($h/2) $w ceil($h/2) 0;
+    border-color: transparent $clr transparent transparent;
+  } @else if $dir == right {
+    border-width: ceil($h/2) 0 ceil($h/2) $w;
+    border-color: transparent transparent transparent $clr;
+  } @else if $dir == top_left {
+    border-width: $w $w 0 0;
+    border-color: $clr transparent transparent transparent;
+  } @else if $dir == top_right {
+    border-width: 0 $w $w 0;
+    border-color: transparent $clr transparent transparent;
+  } @else if $dir == bottom_right {
+    border-width: 0 0 $w $w;
+    border-color: transparent transparent $clr transparent;
+  } @else if $dir == bottom_left {
+    border-width: $w 0 0 $w;
+    border-color: transparent transparent transparent $clr;
+  }
+}
+
+// Clearfix
+@mixin clearfix {
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// Variables
+$fa: 'FontAwesome';
+
+// Usefull Functions
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+@function rem($px-size) {
+  @if ($debug == 1) {
+    @return $px-size;
+  } @else {
+    @return str-replace(#{($px-size/100)}, px, rem);
+  }
+}
+
+@function remove($list, $value, $recursive: false) {
+  $result: ();
+
+  @for $i from 1 through length($list) {
+    @if type-of(nth($list, $i)) == list and $recursive {
+      $result: append($result, remove(nth($list, $i), $value, $recursive));
+    } @else if nth($list, $i) != $value {
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}
+
+@function sort($list) {
+  $sortedlist: ();
+  @while length($list) > 0 {
+    $value: nth($list, 1);
+    @each $item in $list {
+      @if $item < $value {
+        $value: $item;
+      }
+    }
+    $sortedlist: append($sortedlist, $value, 'space');
+    $list: remove($list, $value);
+  }
+  @return $sortedlist;
+}
+
+@function average($list) {
+  $sum: 0;
+
+  @each $i in $list {
+    $sum: $sum + $i;
+  }
+
+  @return $sum / length($list);
+}
+
+@function headings() {
+  @return "h1, h2, h3, h4, h5, h6, .heading-1, .heading-2, .heading-3, .heading-4,.heading-5, .heading-6";
+}
+
+@function cols($resolution) {
+  $selector: ();
+  @each $j in 1, 2, 3, 4, 6, 12 {
+    $selector: append($selector, "> .col-#{$resolution}-#{$j}:nth-child(n + #{(12/$j)+1})", comma);
+  }
+
+  $selector: append($selector, "> .col-#{$resolution}-8.col-#{$resolution}-preffix-2");
+
+  @return $selector;
+}
+
+@function cols-full($resolution) {
+  $selector: ();
+  @for $j from 1 through 12 {
+    $selector: append($selector, "> .col-#{$resolution}-#{$j}:nth-child(n)", comma);
+  }
+
+  @return $selector;
+}
+
+@mixin make-flow-offset($lg-offset, $md-offset: $lg-offset, $sm-offset: $md-offset, $xs-offset: $sm-offset) {
+  & > * + * {
+    margin-top: $xs-offset;
+  }
+
+  html:not(.lt-ie10) & {
+    @media (min-width: $screen-xs-min) {
+      #{cols-full("xs")} {
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-xs-min) {
+      #{cols("xs")} {
+        margin-top: $xs-offset;
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      #{cols-full("sm")} {
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      #{cols("sm")} {
+        margin-top: $sm-offset;
+      }
+    }
+
+    @media (min-width: $screen-md-min) {
+      #{cols-full("md")} {
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-md-min) {
+      #{cols("md")} {
+        margin-top: $md-offset;
+      }
+    }
+
+    @media (min-width: $screen-lg-min) {
+      #{cols-full("lg")} {
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-lg-min) {
+      #{cols("lg")} {
+        margin-top: $lg-offset;
+      }
+    }
+  }
+}

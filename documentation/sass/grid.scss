@@ -1,0 +1,134 @@
+﻿@import "_normalize.scss";
+@import "_mixins.scss";
+
+// Core variables and mixins
+
+// -------------------------
+$gridColumns: 12;
+
+//Default 1200px min
+$gridColumnWidth: 70px;
+$gridGutterWidth: 30px;
+
+//940px grid
+$gridColumnWidth980: 60px;
+$gridGutterWidth980: 20px;
+
+// 768px-979px
+$gridColumnWidth768: 44px;
+$gridGutterWidth768: 20px;
+
+// Fluid
+$fluidGridColumnWidth: 8.3333333333333333333%;
+
+@mixin buildGrid($gridColumnWidth, $gridGutterWidth) {
+
+  .container {
+    width: ($gridColumnWidth * $gridColumns) + ($gridGutterWidth * ($gridColumns - 1));
+  }
+
+  .container {
+    .row {
+      margin-left: $gridGutterWidth * -1;
+    }
+
+    [class*="grid_"] {
+      float: left;
+      min-height: 1px; // prevent collapsing columns
+      margin-left: $gridGutterWidth;
+    }
+
+    @for $i from 1 to $gridColumns + 1 {
+      .grid_#{$i} {
+        width: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1));
+      }
+    }
+
+    @for $i from 1 to $gridColumns + 1 {
+      .preffix_#{$i} {
+        margin-left: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i + 1));
+      }
+    }
+  }
+}
+
+// Grid System
+// -----------
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  @include box-sizing(border-box);
+  @extend %clearfix;
+}
+
+.row {
+  @extend %clearfix;
+}
+
+
+@include buildGrid($gridColumnWidth, $gridGutterWidth);
+
+.page {
+  padding-left: 64px;
+  padding-right: 300px;
+}
+
+@media (max-width: 1599px) {
+  .page{
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+@media (min-width: 1068px) and (max-width: 1301px) {
+  @include buildGrid($gridColumnWidth980, $gridGutterWidth980);
+}
+
+@media (min-width: 878px) and (max-width: 1067px) {
+  @include buildGrid($gridColumnWidth768, $gridGutterWidth768);
+}
+
+@media (max-width: 877px) {
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+  .container .row {
+    margin-left: 0;
+  }
+
+  .row + .row,
+  [class*="grid_"] + [class*="grid_"] {
+    margin-top: 30px;
+  }
+
+  .container, .container-fluid {
+    [class*="grid_"] {
+      float: none;
+      display: block;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .page{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+%clearfix {
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+

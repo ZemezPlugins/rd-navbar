@@ -1,0 +1,113 @@
+/*
+* @subsection   RD Navbar
+*
+* @description  Describes style declarations for RD Navbar extension
+*
+* @author       Evgeniy Gusarov
+* @link         https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
+* @version      2.0.0
+*/
+
+@import "_mixins.scss";
+
+$rd-navbar-default-color: #999;
+$rd-navbar-contrast-color: #333;
+$rd-navbar-accent-color: #f44336;
+$rd-navbar-accent-color-2: rgb(46, 204, 113);
+$rd-navbar-white-color: #fff;
+
+$rd-navbar-shadow-ambient: 0 0 2px 0 rgba(#000, .25);
+$rd-navbar-shadow-medium: 0 3px 5px 0 rgba(#000, .25);
+$rd-navbar-shadow-large: 0 5px 8px 0 rgba(#000, .25);
+
+
+%rd-navbar-transition{
+  transition: .3s all cubic-bezier(0.785, 0.135, 0.150, 0.860);
+}
+
+%rd-navbar-hidden{
+  display: none;
+}
+
+%rd-navbar-visible{
+  display: block;
+}
+
+.rd-navbar--no-transition {
+  &, *{
+    transition: none!important;
+  }
+}
+
+.rd-navbar-wrap{
+  @extend %rd-navbar-transition;
+}
+
+.rd-navbar, .rd-navbar.rd-navbar--is-clone{
+  @extend %rd-navbar-hidden;
+}
+
+.rd-navbar-fixed,
+.rd-navbar-static,
+.rd-navbar-fullwidth,
+.rd-navbar-sidebar{
+  @extend %rd-navbar-visible;
+}
+
+.rd-navbar-outer{
+  color: $rd-navbar-default-color;
+  background: $rd-navbar-contrast-color;
+}
+
+.rd-navbar-static{
+  background: $rd-navbar-white-color;
+  .rd-navbar-nav-wrap,
+  .rd-navbar-search-wrap{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .rd-navbar-nav-wrap{
+    width: 100%;
+  }
+
+  &.rd-navbar--is-clone{
+    @extend %rd-navbar-transition;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    @include transform(translateY(-105%));
+    z-index: 20;
+
+    .rd-navbar-panel{
+      display: none;
+    }
+
+    &.rd-navbar--is-stuck{
+      @include transform(translateY(0));
+    }
+  }
+
+  &.rd-navbar--is-stuck{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 20;
+
+    .rd-navbar-panel{
+      display: none;
+    }
+  }
+}
+
+@import "rd-navbar_components/_rd-navbar-toggles.scss";
+@import "rd-navbar_components/_rd-navbar-nav.scss";
+@import "rd-navbar_components/_rd-navbar-brand.scss";
+@import "rd-navbar_components/_rd-navbar-cart.scss";
+@import "rd-navbar_components/_rd-navbar-panel.scss";
+@import "rd-navbar_components/_rd-navbar-search.scss";
+@import "rd-navbar_components/_rd-navbar-collapse.scss";
+

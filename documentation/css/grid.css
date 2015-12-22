@@ -1,0 +1,381 @@
+/*==========================================================
+                        NORMALIZE
+==========================================================*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: top;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button,
+input[type='button'] {
+  background: none;
+  border: none;
+  display: inline-block;
+  padding: 0;
+  outline: none;
+  outline-offset: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+button::-moz-focus-inner,
+input[type='button']::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1170px;
+}
+
+.container .row {
+  margin-left: -30px;
+}
+.container [class*="grid_"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 30px;
+}
+.container .grid_1 {
+  width: 70px;
+}
+.container .grid_2 {
+  width: 170px;
+}
+.container .grid_3 {
+  width: 270px;
+}
+.container .grid_4 {
+  width: 370px;
+}
+.container .grid_5 {
+  width: 470px;
+}
+.container .grid_6 {
+  width: 570px;
+}
+.container .grid_7 {
+  width: 670px;
+}
+.container .grid_8 {
+  width: 770px;
+}
+.container .grid_9 {
+  width: 870px;
+}
+.container .grid_10 {
+  width: 970px;
+}
+.container .grid_11 {
+  width: 1070px;
+}
+.container .grid_12 {
+  width: 1170px;
+}
+.container .preffix_1 {
+  margin-left: 130px;
+}
+.container .preffix_2 {
+  margin-left: 230px;
+}
+.container .preffix_3 {
+  margin-left: 330px;
+}
+.container .preffix_4 {
+  margin-left: 430px;
+}
+.container .preffix_5 {
+  margin-left: 530px;
+}
+.container .preffix_6 {
+  margin-left: 630px;
+}
+.container .preffix_7 {
+  margin-left: 730px;
+}
+.container .preffix_8 {
+  margin-left: 830px;
+}
+.container .preffix_9 {
+  margin-left: 930px;
+}
+.container .preffix_10 {
+  margin-left: 1030px;
+}
+.container .preffix_11 {
+  margin-left: 1130px;
+}
+.container .preffix_12 {
+  margin-left: 1230px;
+}
+
+.page {
+  padding-left: 64px;
+  padding-right: 300px;
+}
+
+@media (max-width: 1599px) {
+  .page {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+@media (min-width: 1068px) and (max-width: 1301px) {
+  .container {
+    width: 940px;
+  }
+
+  .container .row {
+    margin-left: -20px;
+  }
+  .container [class*="grid_"] {
+    float: left;
+    min-height: 1px;
+    margin-left: 20px;
+  }
+  .container .grid_1 {
+    width: 60px;
+  }
+  .container .grid_2 {
+    width: 140px;
+  }
+  .container .grid_3 {
+    width: 220px;
+  }
+  .container .grid_4 {
+    width: 300px;
+  }
+  .container .grid_5 {
+    width: 380px;
+  }
+  .container .grid_6 {
+    width: 460px;
+  }
+  .container .grid_7 {
+    width: 540px;
+  }
+  .container .grid_8 {
+    width: 620px;
+  }
+  .container .grid_9 {
+    width: 700px;
+  }
+  .container .grid_10 {
+    width: 780px;
+  }
+  .container .grid_11 {
+    width: 860px;
+  }
+  .container .grid_12 {
+    width: 940px;
+  }
+  .container .preffix_1 {
+    margin-left: 100px;
+  }
+  .container .preffix_2 {
+    margin-left: 180px;
+  }
+  .container .preffix_3 {
+    margin-left: 260px;
+  }
+  .container .preffix_4 {
+    margin-left: 340px;
+  }
+  .container .preffix_5 {
+    margin-left: 420px;
+  }
+  .container .preffix_6 {
+    margin-left: 500px;
+  }
+  .container .preffix_7 {
+    margin-left: 580px;
+  }
+  .container .preffix_8 {
+    margin-left: 660px;
+  }
+  .container .preffix_9 {
+    margin-left: 740px;
+  }
+  .container .preffix_10 {
+    margin-left: 820px;
+  }
+  .container .preffix_11 {
+    margin-left: 900px;
+  }
+  .container .preffix_12 {
+    margin-left: 980px;
+  }
+}
+@media (min-width: 878px) and (max-width: 1067px) {
+  .container {
+    width: 748px;
+  }
+
+  .container .row {
+    margin-left: -20px;
+  }
+  .container [class*="grid_"] {
+    float: left;
+    min-height: 1px;
+    margin-left: 20px;
+  }
+  .container .grid_1 {
+    width: 44px;
+  }
+  .container .grid_2 {
+    width: 108px;
+  }
+  .container .grid_3 {
+    width: 172px;
+  }
+  .container .grid_4 {
+    width: 236px;
+  }
+  .container .grid_5 {
+    width: 300px;
+  }
+  .container .grid_6 {
+    width: 364px;
+  }
+  .container .grid_7 {
+    width: 428px;
+  }
+  .container .grid_8 {
+    width: 492px;
+  }
+  .container .grid_9 {
+    width: 556px;
+  }
+  .container .grid_10 {
+    width: 620px;
+  }
+  .container .grid_11 {
+    width: 684px;
+  }
+  .container .grid_12 {
+    width: 748px;
+  }
+  .container .preffix_1 {
+    margin-left: 84px;
+  }
+  .container .preffix_2 {
+    margin-left: 148px;
+  }
+  .container .preffix_3 {
+    margin-left: 212px;
+  }
+  .container .preffix_4 {
+    margin-left: 276px;
+  }
+  .container .preffix_5 {
+    margin-left: 340px;
+  }
+  .container .preffix_6 {
+    margin-left: 404px;
+  }
+  .container .preffix_7 {
+    margin-left: 468px;
+  }
+  .container .preffix_8 {
+    margin-left: 532px;
+  }
+  .container .preffix_9 {
+    margin-left: 596px;
+  }
+  .container .preffix_10 {
+    margin-left: 660px;
+  }
+  .container .preffix_11 {
+    margin-left: 724px;
+  }
+  .container .preffix_12 {
+    margin-left: 788px;
+  }
+}
+@media (max-width: 877px) {
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .container .row {
+    margin-left: 0;
+  }
+
+  .row + .row,
+  [class*="grid_"] + [class*="grid_"] {
+    margin-top: 30px;
+  }
+
+  .container [class*="grid_"], .container-fluid [class*="grid_"] {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+@media (max-width: 479px) {
+  .page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.container:before, .row:before, .container:after, .row:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.container:after, .row:after {
+  clear: both;
+}

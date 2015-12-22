@@ -1,0 +1,442 @@
+﻿@import "_mixins.scss";
+@import "_variables.scss";
+// @import "animate.css";
+// Fonts
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+@import url(//fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(//fonts.googleapis.com/css?family=Oswald:300,400,700);
+@import url(//fonts.googleapis.com/css?family=Roboto+Mono);
+
+/*========================================================
+                      Main Styles
+=========================================================*/
+body {
+  font: $body-font;
+  color: #000;
+  background: #fff;
+  -webkit-text-size-adjust: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #111;
+}
+
+h1 {
+  font-size: 56px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 45px;
+  line-height: 1.37;
+  color: $color-1;
+  margin-top: 60px;
+  margin-bottom: 20px;
+
+  @media (max-width: 479px) {
+    font-size: 34px;
+  }
+}
+
+h3 {
+  color: $color-1;
+  font-size: 34px;
+  line-height: 1.47;
+  margin-top: 60px;
+  margin-bottom: 20px;
+
+  @media (max-width: 479px) {
+    font-size: 24px;
+  }
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 1.66;
+  margin-top: 45px;
+  margin-bottom: 20px;
+
+  @media (max-width: 479px) {
+    font-size: 20px;
+  }
+}
+
+h5 {
+  font-size: 20px;
+  line-height: 1.7;
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+  @media (max-width: 479px) {
+    font-size: 16px;
+  }
+}
+
+h6 {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @media (max-width: 479px) {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+ul, ol{
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  figure:last-child{
+    margin-bottom: 45px;
+  }
+}
+
+article {
+  padding-top: 80px;
+  article{
+    padding-right: 10%;
+  }
+
+  a {
+    color: $color-1;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 1599px) {
+    article{
+      padding-right: 0;
+    }
+  }
+}
+
+figure{
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+em {
+  font-weight: 400;
+  color: #000000;
+}
+
+a {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+
+  &:focus { outline: none; }
+  &:active { background-color: transparent; }
+
+  @include transition(.3s);
+}
+
+a[href^="tel:"],
+a[href^="callto:"] {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-wrap {
+  overflow: hidden;
+}
+
+.page {
+  overflow: hidden;
+  min-height: 500px;
+
+  .lt-ie9 & {
+    min-width: 1200px;
+  }
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background: #e4e4e4;
+}
+
+.color-1 { color: #1d88de; }
+
+.color-2 { color: #ec4034; }
+
+.color-3 { color: #4aab4d; }
+
+.color-4 { color: #ff9700; }
+
+.relative { position: relative; }
+
+.img-polaroid {
+  width: auto;
+  padding: 20px;
+  background-color: #cecece;
+  text-align: center;
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.clearfix {
+  clear: both;
+  overflow: hidden;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+.files_structure {
+  li {
+    .fa {
+      margin-right: 10px;
+      color: lighten($color-1, 10%);
+      font-size: 16px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+  }
+
+  li:first-child, li{
+    margin-top: 10px;
+  }
+}
+
+.inline-term{
+  @include clearfix;
+  dt{
+    font-weight: 700;
+  }
+
+  dt, dd{
+    display: inline;
+  }
+
+  dt + dd{
+    position: relative;
+    padding-left: 20px;
+
+    &:before{
+      position: absolute;
+      left: 5px;
+      content: '–';
+    }
+  }
+}
+
+code{
+  display: block;
+  background: #eeeeee;
+  padding: 20px;
+  color: #434343;
+  font: 400 13px/24px "Roboto Mono", monospace;
+  overflow: auto;
+}
+
+.fa{
+  line-height: inherit;
+}
+
+.fa-angle-right{
+  padding-right: 5px;
+  font-weight: 700;
+}
+
+.center{
+  text-align: center;
+}
+
+/*=======================================================
+                        Components
+=========================================================*/
+
+/*===============  Marked List  ==================*/
+.marked-list{
+  > li {
+    position: relative;
+    padding-left: 20px;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 2px;
+      width: 4px;
+      height: 4px;
+      border: 1px solid #000;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
+  }
+
+  & + li { margin-top: 10px; }
+}
+
+/*===============  Inline List  ==================*/
+.inline-list{
+  margin-left: -16px;
+
+  li{
+    display: inline-block;
+    margin-left: 16px;
+  }
+}
+
+/*===============  Index List   ==================*/
+.index-list {
+  counter-reset: li;
+  > li {
+    position: relative;
+    padding-left: 20px;
+    &:before, .index-list_counter{
+      content: counter(li,decimal) '.';
+      counter-increment: li;
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+    }
+
+    & + li { margin-top: 10px; }
+  }
+}
+
+/*==================== Search ====================*/
+
+.search {
+  position: relative;
+  .fa {
+    color: #fff;
+  }
+}
+
+#search {
+  border: none;
+}
+
+.search-results {
+  position: absolute;
+  left: 0;
+  top: 21px;
+  text-align: left;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-results > * {
+  padding: 10px;
+}
+
+/*==================== Blockquote ====================*/
+blockquote {
+  padding: 21px 30px 25px;
+  border-left: 8px solid;
+  font-size: 16px;
+  line-height: 26px;
+  background: #ffffff;
+  box-shadow: 5px 5px 9px 0px rgba(0, 0, 0, 0.22);
+}
+
+/*==================== Box ====================*/
+.box {
+  min-height: 324px;
+  border-radius: 3px;
+  background: #eef5fb;
+  box-shadow: 5px 5px 9px 0px rgba(0, 0, 0, 0.22);
+}
+
+/*==================== Chapter Nav ====================*/
+.chapter-nav {
+  border-left: 5px solid rgba(#1d88de, 0.25);
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 0 0 0 20px;
+
+  h4 + ul {
+    margin-top: 22px;
+  }
+
+  h4 {
+    margin-top: 0;
+    line-height: 16px;
+    color: #757575;
+  }
+
+  a {
+    color: #1d88de;
+    &:hover { color: lighten(#1d88de, 10%); }
+  }
+
+  li {
+    & + li { margin-top: 10px; }
+  }
+}
+
+//==================    Imports    ======================
+@import "_navbar.scss";
+@import "_stuck.scss";
+@import "_select.scss";
+@import "_alerts.scss";
+@import "_to-top.scss";
+@import "_owl-carousel.scss";
+
+/*========================================================
+                     HEADER  Section
+=========================================================*/
+header {
+  background: $color-1;
+  color: #ffffff;
+  h1, h2, h3, h4, h5, h6 { color: #ffffff; }
+}
+
+/*========================================================
+                     CONTENT  Section
+=========================================================*/
+main {
+  display: block;
+  padding-top: 120px;
+  padding-bottom: 120px;
+
+  *:first-child {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  > .container {
+    padding-right: 14%;
+  }
+
+  @media (max-width: 1599px) {
+    > .container{
+      padding-right: 0;
+    }
+  }
+}
+
+/*========================================================
+                     FOOTER  Styles
+=========================================================*/
+footer {
+  @include clearfix();
+}
+
+.copyright {
+  margin: 0;
+}

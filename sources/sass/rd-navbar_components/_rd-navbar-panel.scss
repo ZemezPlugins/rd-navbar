@@ -1,0 +1,32 @@
+/*
+* @subsection   RD Navbar Toggles
+*
+* @description  Describes style declarations for RD Navbar panel
+*/
+
+.rd-navbar-static{
+  .rd-navbar-panel{
+    @include clearfix;
+    padding: 50px 0;
+  }
+}
+
+.rd-navbar-fixed{
+  .rd-navbar-panel-canvas{
+    position: fixed;
+    height: 56px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: $rd-navbar-white-color;
+    box-shadow: $rd-navbar-shadow-medium;
+    z-index: 16;
+  }
+
+  .rd-navbar-toggle{
+    position: fixed;
+    z-index: 17;
+    top: 4px;
+    left: 4px;
+  }
+}

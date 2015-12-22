@@ -1,0 +1,101 @@
+/*==================== Navbar ====================*/
+.select {
+  display: inline-block;
+  position: relative;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: left;
+
+  select { display: none; }
+
+  .pseudo-select {
+    padding-left: 8px;
+    padding-right: 20px;
+    cursor: pointer;
+    opacity: .9;
+
+    &:before {
+      content: "\f0d7";
+      font-family: FontAwesome;
+      position: absolute;
+      top: 1px;
+      right: 6px;
+      font-size: 14px;
+      @include transition(.3s);
+    }
+  }
+
+  .pseudo-dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: -1px;
+    overflow: hidden;
+    color: #212121;
+    background: #FFF;
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.12);
+
+    li {
+      a {
+        display: block;
+        color: inherit;
+        box-sizing: border-box;
+        opacity: 0;
+        height: 0;
+        padding: 0px 8px;
+        line-height: 26px;
+        @include transition(.3s);
+      }
+
+      &.selected, &:hover a {
+        color: $color-1;
+        background: #EEE;
+      }
+    }
+  }
+
+  &.opened {
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.12);
+
+    .pseudo-select {
+      color: #2D2D2D;
+      background: #FFF;
+      opacity: 1;
+      &:before {
+        transform: rotate(180deg);
+      }
+    }
+
+    .pseudo-dropdown {
+      padding: 10px 0 6px 0;
+      border-top: 1px solid #D2D2D2;
+      li a {
+        opacity: 1;
+        height: 26px;
+        @include animation(open .3s 1 forwards);
+      }
+    }
+
+    @include keyframes(open) {
+      0% {
+        opacity: 0;
+        height: 0;
+      }
+
+      20% {
+        opacity: 0;
+      }
+
+      60% {
+        opacity: 0.5;
+        height: 26px;
+      }
+
+      100% {
+        opacity: 1;
+        height: 26px;
+      }
+    }
+  }
+}

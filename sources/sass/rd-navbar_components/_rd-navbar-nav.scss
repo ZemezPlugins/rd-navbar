@@ -1,0 +1,226 @@
+/*
+* @subsection   RD Navbar Toggles
+*
+* @description  Describes style declarations for RD Navbar navigation
+*/
+
+.rd-navbar-nav, .rd-navbar-toggle{
+  display: none;
+}
+
+.rd-navbar-static{
+
+  .rd-navbar-subpanel{
+    display: table;
+  }
+
+  .rd-navbar-outer .rd-navbar-inner{
+    position: relative;
+  }
+
+  .rd-navbar-dropdown,
+  .rd-navbar-megamenu{
+    @extend %rd-navbar-transition;
+    position: absolute;
+    padding: 8px 0;
+    color: $rd-navbar-default-color;
+    background: $rd-navbar-contrast-color;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    @include transform(translateY(30px));
+
+    li > a{
+      display: block;
+      font-size: 14px;
+      line-height: 24px;
+      padding: 6px 16px;
+    }
+
+    li.focus > a, li.opened > a, a:hover{
+      color: $rd-navbar-white-color;
+      background: lighten($rd-navbar-contrast-color, 5%);
+    }
+  }
+
+  .rd-navbar-dropdown{
+    width: 270px;
+  }
+
+  .rd-navbar-megamenu{
+    margin-top: 10px;
+    left: 0;
+    right: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 16px 8px;
+
+    > li{
+      display: table-cell;
+    }
+  }
+
+  .rd-navbar-nav{
+    display: block;
+    text-align: left;
+
+    li.rd-navbar--has-dropdown{
+      position: relative;
+    }
+
+    li.focus,
+    li.opened{
+      > .rd-navbar-dropdown, > .rd-navbar-megamenu{
+        opacity: 1;
+        visibility: visible;
+        @include transform(translateY(0));
+      }
+    }
+
+    > li{
+      display: inline-block;
+
+      > .rd-navbar-dropdown, > .rd-navbar-megamenu{
+        top: 100%;
+        z-index: 1;
+      }
+
+      > .rd-navbar-dropdown{
+        left: 50%;
+        margin-top: 10px;
+        margin-left: -135px;
+
+        .rd-navbar-dropdown{
+          left: 100%;
+          top: -8px;
+          z-index: 2;
+        }
+      }
+
+      > a{
+        display: block;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 26px;
+        padding: 18px 16px;
+        text-transform: uppercase;
+      }
+
+      &.active > a, &.opened > a,  &.focus > a, > a:hover{
+        color: $rd-navbar-white-color;
+      }
+    }
+  }
+}
+
+.rd-navbar-fixed {
+  .rd-navbar-toggle {
+    display: block;
+    @include toggle-lines-to-arrow(48px, 24px, $rd-navbar-contrast-color);
+  }
+
+  .rd-navbar-nav-wrap {
+    @extend %rd-navbar-transition;
+    position: fixed;
+    top: -56px;
+    left: 0;
+    width: 232px;
+    padding: 112px 0 56px;
+    bottom: -56px;
+    color: $rd-navbar-default-color;
+    background: $rd-navbar-white-color;
+    box-shadow: $rd-navbar-shadow-medium;
+    z-index: 15;
+    @include transform(translateX(-105%));
+
+    &.active {
+      @include transform(translateX(0));
+    }
+  }
+
+  .rd-navbar-nav {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: left;
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      height: 8px;
+    }
+
+    li {
+      > a {
+        display: block;
+        padding: 11px 56px 11px 16px;
+        color: $rd-navbar-contrast-color;
+      }
+
+      &.opened > a, a:hover {
+        background: lighten($rd-navbar-contrast-color, 75%);
+      }
+
+      &.active {
+        .rd-navbar-submenu-toggle{
+          color: $rd-navbar-white-color;
+        }
+
+        > a {
+          color: $rd-navbar-white-color;
+          background: $rd-navbar-accent-color;
+        }
+      }
+    }
+  }
+
+  .rd-navbar-dropdown,
+  .rd-navbar-megamenu {
+    display: none;
+  }
+
+  .rd-navbar-submenu {
+    position: relative;
+    @extend %rd-navbar-transition;
+
+    li > a {
+      padding-left: 32px;
+    }
+
+    .rd-navbar-dropdown li li > a,
+    .rd-navbar-megamenu ul li li > a {
+      padding-left: 48px;
+    }
+
+    &.opened {
+      > .rd-navbar-dropdown,
+      > .rd-navbar-megamenu {
+        display: block;
+      }
+    }
+  }
+
+  .rd-navbar-submenu-toggle {
+    @extend %rd-navbar-transition;
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    font: 400 24px/24px 'Material Icons';
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    color: $rd-navbar-default-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $rd-navbar-contrast-color;
+    }
+
+    &:before {
+      content: '\e5cf';
+    }
+  }
+}
