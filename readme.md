@@ -20,7 +20,7 @@ There are several classes that you can use for your navigation creation:
 toggles.
 
 ## Setup
-The HTML, CSS and JS codes are always unique for your target navigation. So check out our extended documentation for additional instructions: [Documentation](http://cms.devoffice.com/coding-dev/rd-navbar/documentation/)
+The HTML, CSS and JavaScript codes are always unique for your target navigation. So check out our extended documentation for additional instructions: [Documentation](http://cms.devoffice.com/coding-dev/rd-navbar/documentation/)
 
 ## License
 Licensed under dual [CC By-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)
