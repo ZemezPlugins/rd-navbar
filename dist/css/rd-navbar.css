@@ -6,7 +6,7 @@
 *
 * @author       Evgeniy Gusarov
 * @link         https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
-* @version      2.0.0
+* @version      2.1.1
 */
 .rd-navbar-wrap, .rd-navbar-static.rd-navbar--is-clone, .rd-navbar-static .rd-navbar-dropdown,
 .rd-navbar-static .rd-navbar-megamenu, .rd-navbar-fixed .rd-navbar-nav-wrap, .rd-navbar-fixed .rd-navbar-submenu, .rd-navbar-fixed .rd-navbar-submenu-toggle, .rd-navbar-cart, .rd-navbar-static .rd-navbar-cart-buy, .rd-navbar-fixed .rd-navbar-cart-floating, .rd-navbar-fixed .rd-navbar-cart-floating:before, .rd-navbar-fixed .rd-navbar-cart-floating .rd-navbar-cart-buy, .rd-navbar-fixed .rd-navbar-search .form-group, .rd-navbar-fixed .rd-navbar-collapse, .rd-navbar-fixed .rd-navbar-collapse:before {
@@ -247,18 +247,25 @@
     display: block; }
 .rd-navbar-fixed .rd-navbar-submenu-toggle {
   position: absolute;
-  right: 16px;
-  top: 12px;
+  right: 0;
+  top: 0;
+  bottom: 0;
   font: 400 24px/24px 'Material Icons';
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 48px;
   text-align: center;
   color: #999;
   cursor: pointer; }
   .rd-navbar-fixed .rd-navbar-submenu-toggle:hover {
     color: #333; }
   .rd-navbar-fixed .rd-navbar-submenu-toggle:before {
-    content: '\e5cf'; }
+    content: '\e5cf';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    transform: translate(0, -50%); }
 
 /*
 * @subsection   RD Navbar Brand

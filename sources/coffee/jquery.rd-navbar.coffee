@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.0
+ * @version      2.1.1
 ###
 
 # Global flags
@@ -453,7 +453,7 @@ isTouch = "ontouchstart" of window
           $this.on('mouseleave.navbar', $.proxy(ctx.dropdownOut, @, ctx, timer))
           $this.find('> a').on('mouseenter.navbar', $.proxy(ctx.dropdownOver, @, ctx, timer))
           $this.find('> .rd-navbar-submenu-toggle')
-            .on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.dropdownToggle, @, ctx))
+            .on('click', $.proxy(ctx.dropdownToggle, @, ctx))
           $this.parents('body')
             .on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.dropdownClose, @, ctx))
         )
@@ -462,7 +462,7 @@ isTouch = "ontouchstart" of window
       ctx.$element.add(ctx.$clone)
         .find('.rd-navbar-nav a[href^="#"]')
         .each(()->
-          $(@).on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.goToAnchor, @, ctx))
+          $(@).on(( if isTouch then 'touchstart' else 'click'), $.proxy(ctx.goToAnchor, @, ctx))
         )
 
       return ctx
@@ -489,7 +489,7 @@ isTouch = "ontouchstart" of window
     ###
     getOption: (key)->
       for point of @.options.responsive
-        if point <= @.$win.width() then targetPoint = point
+        if point <= window.innerWidth then targetPoint = point
       if @.options.responsive[targetPoint][key]? then @.options.responsive[targetPoint][key] else @.options[key]
 
 

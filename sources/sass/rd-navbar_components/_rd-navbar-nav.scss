@@ -206,11 +206,12 @@
   .rd-navbar-submenu-toggle {
     @extend %rd-navbar-transition;
     position: absolute;
-    right: 16px;
-    top: 12px;
+    right: 0;
+    top: 0;
+    bottom: 0;
     font: 400 24px/24px 'Material Icons';
-    width: 24px;
-    height: 24px;
+    width: 50px;
+    height: 48px;
     text-align: center;
     color: $rd-navbar-default-color;
     cursor: pointer;
@@ -221,6 +222,12 @@
 
     &:before {
       content: '\e5cf';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      transform: translate(0, -50%);
     }
   }
 }
