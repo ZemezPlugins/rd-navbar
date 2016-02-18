@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.1
+ * @version      2.1.2
 ###
 
 # Global flags
@@ -33,7 +33,8 @@ isTouch = "ontouchstart" of window
       stickUpOffset: '100%'
       anchorNavSpeed: 400
       anchorNavOffset: 0
-      anchorNavEasing: 'swing'
+      anchorNavEasing: 'swing',
+      autoHeight: true
       responsive:
         0:
           layout: "rd-navbar-fixed"
@@ -98,6 +99,7 @@ isTouch = "ontouchstart" of window
       ctx.$element.addClass("rd-navbar").addClass(ctx.options.layout)
       ctx.$element.addClass("rd-navbar--is-touch") if isTouch
 
+      @.setDataAPI(ctx)
       @.createNav(ctx) if ctx.options.domAppend
       @.createClone(ctx) if ctx.options.stickUpClone
       @.applyHandlers(ctx)
@@ -185,8 +187,9 @@ isTouch = "ontouchstart" of window
     ###
     resizeWrap: (e)->
       ctx = @
-      if !ctx.$clone? and !ctx.isStuck
+      if !ctx.$clone? and !ctx.isStuck and ctx.getOption('autoHeight')
         $wrap = ctx.$element.parent()
+
         ctx.height = ctx.$element.outerHeight()
 
         if e.type is 'resize'
@@ -484,13 +487,46 @@ isTouch = "ontouchstart" of window
       obj.removeClass('rd-navbar--no-transition')
 
     ###*
+    * Check data attributes and write responsive object
+    * @protected
+    ###
+    setDataAPI: (ctx) ->
+      aliaces = ["-","-xs-", "-sm-", "-md-", "-lg-"]
+      values = [0, 480, 768, 992, 1200]
+
+      for value, i in values
+        # data attribute for responsive layout option
+        if @.$element.attr('data' + aliaces[i] + 'layout' )
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]].layout = @.$element.attr('data' + aliaces[i] + 'layout')
+        # data attribute for responsive deviceLayout option
+        if @.$element.attr('data' + aliaces[i] + 'device-layout')
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]]['deviceLayout'] = @.$element.attr('data' + aliaces[i] + 'device-layout')
+        # data attribute for responsive focusOnHover option
+        if @.$element.attr('data' + aliaces[i] + 'hover-on' )
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]]['focusOnHover'] = @.$element.attr('data' + aliaces[i] + 'hover-on') is 'true'
+        # data attribute for responsive stickUp option
+        if @.$element.attr('data' + aliaces[i] + 'stick-up')
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]]['stickUp'] = @.$element.attr('data' + aliaces[i] + 'stick-up') is 'true'
+        # data attribute for responsive autoHeight option
+        if @.$element.attr('data' + aliaces[i] + 'auto-height')
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]]['autoHeight'] = @.$element.attr('data' + aliaces[i] + 'auto-height') is 'true'
+
+      return
+
+
+    ###*
     * Gets specific option of plugin
     * @protected
     ###
     getOption: (key)->
       for point of @.options.responsive
         if point <= window.innerWidth then targetPoint = point
-      if @.options.responsive[targetPoint][key]? then @.options.responsive[targetPoint][key] else @.options[key]
+      if @.options.responsive? and @.options.responsive[targetPoint][key]? then @.options.responsive[targetPoint][key] else @.options[key]
 
 
   ###*

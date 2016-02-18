@@ -73,4 +73,15 @@
    как только навбар будет полностью проскролен на странице.
 </p>
 
+<p>
+    Также, в случае необходимости, можно указать responsive object с помощью HTML. Для этого необходимо указать следующие аттрибуты
+</p>
+
+<code>
+<pre>
+&lt;!-- RD Navbar --&gt;
+&lt;nav class="rd-navbar" data-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true"&gt;
+</pre>
+</code>
+
 

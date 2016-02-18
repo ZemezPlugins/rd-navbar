@@ -24,6 +24,26 @@
     <li>
         <dl class="inline-term">
             <dt>
+                18.02.2016
+            </dt>
+            <dd>
+                Версия 2.1.2. Добавлена новая опция autoHeight и новые data атрибуты.
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>
+                10.02.2016
+            </dt>
+            <dd>
+                Версия 2.1.1. Исправлена ошибка с просмотром подменю в сафари на iPhone и iPad. Исправлен просчет брекпоинтов для Chrome.
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>
                 01.12.2015
             </dt>
             <dd>

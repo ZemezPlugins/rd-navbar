@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.1
+ * @version      2.1.2
  */
 
 (function() {
@@ -39,6 +39,7 @@
         anchorNavSpeed: 400,
         anchorNavOffset: 0,
         anchorNavEasing: 'swing',
+        autoHeight: true,
         responsive: {
           0: {
             layout: "rd-navbar-fixed",
@@ -113,6 +114,7 @@
         if (isTouch) {
           ctx.$element.addClass("rd-navbar--is-touch");
         }
+        this.setDataAPI(ctx);
         if (ctx.options.domAppend) {
           this.createNav(ctx);
         }
@@ -208,7 +210,7 @@
       RDNavbar.prototype.resizeWrap = function(e) {
         var $wrap, ctx;
         ctx = this;
-        if ((ctx.$clone == null) && !ctx.isStuck) {
+        if ((ctx.$clone == null) && !ctx.isStuck && ctx.getOption('autoHeight')) {
           $wrap = ctx.$element.parent();
           ctx.height = ctx.$element.outerHeight();
           if (e.type === 'resize') {
@@ -552,6 +554,51 @@
 
 
       /**
+      * Check data attributes and write responsive object
+      * @protected
+       */
+
+      RDNavbar.prototype.setDataAPI = function(ctx) {
+        var aliaces, i, j, len, value, values;
+        aliaces = ["-", "-xs-", "-sm-", "-md-", "-lg-"];
+        values = [0, 480, 768, 992, 1200];
+        for (i = j = 0, len = values.length; j < len; i = ++j) {
+          value = values[i];
+          if (this.$element.attr('data' + aliaces[i] + 'layout')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]].layout = this.$element.attr('data' + aliaces[i] + 'layout');
+          }
+          if (this.$element.attr('data' + aliaces[i] + 'device-layout')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]]['deviceLayout'] = this.$element.attr('data' + aliaces[i] + 'device-layout');
+          }
+          if (this.$element.attr('data' + aliaces[i] + 'hover-on')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]]['focusOnHover'] = this.$element.attr('data' + aliaces[i] + 'hover-on') === 'true';
+          }
+          if (this.$element.attr('data' + aliaces[i] + 'stick-up')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]]['stickUp'] = this.$element.attr('data' + aliaces[i] + 'stick-up') === 'true';
+          }
+          if (this.$element.attr('data' + aliaces[i] + 'auto-height')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]]['autoHeight'] = this.$element.attr('data' + aliaces[i] + 'auto-height') === 'true';
+          }
+        }
+      };
+
+
+      /**
       * Gets specific option of plugin
       * @protected
        */
@@ -563,7 +610,7 @@
             targetPoint = point;
           }
         }
-        if (this.options.responsive[targetPoint][key] != null) {
+        if ((this.options.responsive != null) && (this.options.responsive[targetPoint][key] != null)) {
           return this.options.responsive[targetPoint][key];
         } else {
           return this.options[key];

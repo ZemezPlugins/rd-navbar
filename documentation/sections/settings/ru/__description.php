@@ -1,10 +1,42 @@
 <h2 class="item1">Настройки скрипта</h2>
 
+<h6>Обозначения для data атрибутов:</h6>
+<p>
+    (*) - суффикс, определяющий для какого размера экрана будет определено свойство. Суффиксы:
+</p>
+
+<ul class="marked-list">
+    <li>
+        <dl class="inline-term">
+            <dt>xs</dt>
+            <dd>от 480px</dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>sm</dt>
+            <dd>от 768px</dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>md</dt>
+            <dd>от 992px</dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>lg</dt>
+            <dd>от 1199px</dd>
+        </dl>
+    </li>
+</ul>
+
 <h3>
     Настройки
 </h3>
 
-<h5>layout</h5>
+<h5>layout или data-(*)-layout</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
     <dd>String</dd>
@@ -18,7 +50,7 @@
     Определяет тип лейаута навбара
 </p>
 
-<h5>deviceLayout</h5>
+<h5>deviceLayout или data-(*)-device-layout</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
     <dd>String</dd>
@@ -32,7 +64,7 @@
     Определяет тип лейаута навбара для мобильных устройств
 </p>
 
-<h5>focusOnHover</h5>
+<h5>focusOnHover или data-(*)-hover-on</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
     <dd>Boolean</dd>
@@ -89,7 +121,7 @@
     Флаг, отвечающий за автоматическое дополнение указанной HTML разметки навбара дополнительными служебными классами и элементами.
 </p>
 
-<h5>stickUp</h5>
+<h5>stickUp или data-(*)-stick-up</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
     <dd>Boolean</dd>
@@ -174,6 +206,20 @@
     Определяет название временной функции движения при использовании одностраничной навигации. Требует подключенного плагина jQuery Easing 1.1+.
 </p>
 
+<h5>autoHeight или data-(*)-auto-height</h5>
+<dl class="inline-term">
+    <dt>Тип</dt>
+    <dd>Boolean</dd>
+</dl>
+<dl class="inline-term">
+    <dt>Значение по-умолчанию</dt>
+    <dd>true</dd>
+</dl>
+
+<p>
+    Определяет, будет ли просчитываться высота для rd-navbar-wrap.
+</p>
+
 <h5>responsive</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
@@ -193,7 +239,6 @@
 <p>
     Объект, который используется для определений callback функций для определенных событий
 </p>
-
 
 <h3>
     События

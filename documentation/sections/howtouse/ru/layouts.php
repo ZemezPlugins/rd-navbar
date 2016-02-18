@@ -80,6 +80,18 @@
     Таким образом, можно добиться эффекта соответствия стилизации навигации, например, стандарту Material Design на мобильных устройствах.
 </p>
 
+<p>
+    Также, в случае необходимости, можно указать responsive object с помощью HTML. Для этого необходимо указать следующие аттрибуты
+</p>
+
+<code>
+<pre>
+&lt;!-- RD Navbar --&gt;
+&lt;nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fullwidth"
+                        data-lg-layout="rd-navbar-static" data-deviceLayout="rd-navbar-fixed"&gt;
+</pre>
+</code>
+
 
 
 
