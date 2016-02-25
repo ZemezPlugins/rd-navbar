@@ -24,6 +24,16 @@
     <li>
         <dl class="inline-term">
             <dt>
+                25.02.2016
+            </dt>
+            <dd>
+                Версия 2.1.3. Поправлена работа аттрибутов data-*-auto-height.
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="inline-term">
+            <dt>
                 18.02.2016
             </dt>
             <dd>

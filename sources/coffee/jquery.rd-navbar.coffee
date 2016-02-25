@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.2
+ * @version      2.1.3
 ###
 
 # Global flags
@@ -187,8 +187,12 @@ isTouch = "ontouchstart" of window
     ###
     resizeWrap: (e)->
       ctx = @
-      if !ctx.$clone? and !ctx.isStuck and ctx.getOption('autoHeight')
+
+      if !ctx.$clone? and !ctx.isStuck
         $wrap = ctx.$element.parent()
+        if not ctx.getOption('autoHeight')
+          $wrap.css('height', 'auto')
+          return
 
         ctx.height = ctx.$element.outerHeight()
 

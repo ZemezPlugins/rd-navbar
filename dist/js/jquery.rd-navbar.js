@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.2
+ * @version      2.1.3
  */
 
 (function() {
@@ -210,8 +210,12 @@
       RDNavbar.prototype.resizeWrap = function(e) {
         var $wrap, ctx;
         ctx = this;
-        if ((ctx.$clone == null) && !ctx.isStuck && ctx.getOption('autoHeight')) {
+        if ((ctx.$clone == null) && !ctx.isStuck) {
           $wrap = ctx.$element.parent();
+          if (!ctx.getOption('autoHeight')) {
+            $wrap.css('height', 'auto');
+            return;
+          }
           ctx.height = ctx.$element.outerHeight();
           if (e.type === 'resize') {
             $wrap.addClass('rd-navbar--no-transition').css('height', ctx.height);
