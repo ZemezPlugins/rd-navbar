@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.3
+ * @version      2.1.4
 ###
 
 # Global flags
@@ -201,6 +201,7 @@ isTouch = "ontouchstart" of window
             .addClass('rd-navbar--no-transition')
             .css('height', ctx.height)
 
+          console.log 1
           #Trigger a reflow, flushing the CSS changes
           $wrap[0].offsetHeight
 
@@ -445,9 +446,9 @@ isTouch = "ontouchstart" of window
         .find('[data-rd-navbar-toggle]')
         .each(()->
           $this = $(@)
-          $this.on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.switchToggle, @, ctx))
+          $this.on(('click'), $.proxy(ctx.switchToggle, @, ctx))
           $this.parents('body')
-            .on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.closeToggle, @, ctx))
+            .on(('click'), $.proxy(ctx.closeToggle, @, ctx))
         )
 
       # Enables Submenu events
@@ -462,14 +463,14 @@ isTouch = "ontouchstart" of window
           $this.find('> .rd-navbar-submenu-toggle')
             .on('click', $.proxy(ctx.dropdownToggle, @, ctx))
           $this.parents('body')
-            .on((if isTouch then 'touchstart' else 'click'), $.proxy(ctx.dropdownClose, @, ctx))
+            .on(('click'), $.proxy(ctx.dropdownClose, @, ctx))
         )
 
       # Enables OnePage Nav
       ctx.$element.add(ctx.$clone)
         .find('.rd-navbar-nav a[href^="#"]')
         .each(()->
-          $(@).on(( if isTouch then 'touchstart' else 'click'), $.proxy(ctx.goToAnchor, @, ctx))
+          $(@).on(('click'), $.proxy(ctx.goToAnchor, @, ctx))
         )
 
       return ctx
@@ -518,7 +519,11 @@ isTouch = "ontouchstart" of window
         # data attribute for responsive autoHeight option
         if @.$element.attr('data' + aliaces[i] + 'auto-height')
           @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
-          @.options.responsive[values[i]]['autoHeight'] = @.$element.attr('data' + aliaces[i] + 'auto-height') is 'true'
+          @.options.responsive[values[i]]['autoHeight'] = @.$element.attr('data' + aliaces[i] + 'auto-height') is 'true'  
+        # data attribute for responsive Stick up offset option
+        if @.$element.attr('data' + aliaces[i] + 'stick-up-offset')
+          @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+          @.options.responsive[values[i]]['stickUpOffset'] = parseInt(@.$element.attr('data' + aliaces[i] + 'stick-up-offset'))
 
       return
 

@@ -21,6 +21,16 @@
 <h3>Список изменений</h3>
 
 <ul class="marked-list">
+<li>
+        <dl class="inline-term">
+            <dt>
+                19.04.2016
+            </dt>
+            <dd>
+                Версия 2.1.4. Добавлен аттрибут data-stick-up-offset. Исправлена работа тогглов на touch мониторах.
+            </dd>
+        </dl>
+    </li>
     <li>
         <dl class="inline-term">
             <dt>

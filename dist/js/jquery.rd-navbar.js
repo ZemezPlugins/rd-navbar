@@ -219,6 +219,7 @@
           ctx.height = ctx.$element.outerHeight();
           if (e.type === 'resize') {
             $wrap.addClass('rd-navbar--no-transition').css('height', ctx.height);
+            console.log(1);
             $wrap[0].offsetHeight;
             return $wrap.removeClass('rd-navbar--no-transition');
           } else {
@@ -524,8 +525,8 @@
         ctx.$element.add(ctx.$clone).find('[data-rd-navbar-toggle]').each(function() {
           var $this;
           $this = $(this);
-          $this.on((isTouch ? 'touchstart' : 'click'), $.proxy(ctx.switchToggle, this, ctx));
-          return $this.parents('body').on((isTouch ? 'touchstart' : 'click'), $.proxy(ctx.closeToggle, this, ctx));
+          $this.on('click', $.proxy(ctx.switchToggle, this, ctx));
+          return $this.parents('body').on('click', $.proxy(ctx.closeToggle, this, ctx));
         });
         ctx.$element.add(ctx.$clone).find('.rd-navbar-submenu').each(function() {
           var $this, timer;
@@ -534,10 +535,10 @@
           $this.on('mouseleave.navbar', $.proxy(ctx.dropdownOut, this, ctx, timer));
           $this.find('> a').on('mouseenter.navbar', $.proxy(ctx.dropdownOver, this, ctx, timer));
           $this.find('> .rd-navbar-submenu-toggle').on('click', $.proxy(ctx.dropdownToggle, this, ctx));
-          return $this.parents('body').on((isTouch ? 'touchstart' : 'click'), $.proxy(ctx.dropdownClose, this, ctx));
+          return $this.parents('body').on('click', $.proxy(ctx.dropdownClose, this, ctx));
         });
         ctx.$element.add(ctx.$clone).find('.rd-navbar-nav a[href^="#"]').each(function() {
-          return $(this).on((isTouch ? 'touchstart' : 'click'), $.proxy(ctx.goToAnchor, this, ctx));
+          return $(this).on('click', $.proxy(ctx.goToAnchor, this, ctx));
         });
         return ctx;
       };

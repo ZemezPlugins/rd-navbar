@@ -149,7 +149,7 @@
     Определяет, какой элемент будет использоваться для создания эффекта прилипания при скролле: клон или оригинал.
 </p>
 
-<h5>stickUpOffset</h5>
+<h5>stickUpOffset или data-(*)-stick-up-offset</h5>
 <dl class="inline-term">
     <dt>Тип</dt>
     <dd>Number|String</dd>
