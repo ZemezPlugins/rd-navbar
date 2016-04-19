@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.3
+ * @version      2.1.4
  */
 
 (function() {
@@ -219,7 +219,6 @@
           ctx.height = ctx.$element.outerHeight();
           if (e.type === 'resize') {
             $wrap.addClass('rd-navbar--no-transition').css('height', ctx.height);
-            console.log(1);
             $wrap[0].offsetHeight;
             return $wrap.removeClass('rd-navbar--no-transition');
           } else {
@@ -598,6 +597,12 @@
               this.options.responsive[values[i]] = {};
             }
             this.options.responsive[values[i]]['autoHeight'] = this.$element.attr('data' + aliaces[i] + 'auto-height') === 'true';
+          }
+          if (this.$element.attr('data' + aliaces[i] + 'stick-up-offset')) {
+            if (!this.options.responsive[values[i]]) {
+              this.options.responsive[values[i]] = {};
+            }
+            this.options.responsive[values[i]]['stickUpOffset'] = this.$element.attr('data' + aliaces[i] + 'stick-up-offset');
           }
         }
       };

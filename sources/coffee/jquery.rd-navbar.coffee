@@ -201,7 +201,6 @@ isTouch = "ontouchstart" of window
             .addClass('rd-navbar--no-transition')
             .css('height', ctx.height)
 
-          console.log 1
           #Trigger a reflow, flushing the CSS changes
           $wrap[0].offsetHeight
 
@@ -523,7 +522,7 @@ isTouch = "ontouchstart" of window
         # data attribute for responsive Stick up offset option
         if @.$element.attr('data' + aliaces[i] + 'stick-up-offset')
           @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
-          @.options.responsive[values[i]]['stickUpOffset'] = parseInt(@.$element.attr('data' + aliaces[i] + 'stick-up-offset'))
+          @.options.responsive[values[i]]['stickUpOffset'] = @.$element.attr('data' + aliaces[i] + 'stick-up-offset')
 
       return
 
