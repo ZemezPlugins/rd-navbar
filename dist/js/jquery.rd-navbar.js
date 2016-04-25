@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.4
+ * @version      2.1.5
  */
 
 (function() {
@@ -235,8 +235,14 @@
 
       RDNavbar.prototype.createNav = function(ctx) {
         ctx.$element.find('.rd-navbar-dropdown, .rd-navbar-megamenu').each(function() {
-          var $this;
+          var $this, rect;
           $this = $(this);
+          rect = this.getBoundingClientRect();
+          if ((rect.left + $this.outerWidth()) >= window.innerWidth - 10) {
+            this.className += ' rd-navbar-open-left';
+          } else if ((rect.left - $this.outerWidth()) <= 10) {
+            this.className += ' rd-navbar-open-right';
+          }
           if ($this.hasClass('rd-navbar-megamenu')) {
             return $this.parent().addClass('rd-navbar--has-megamenu');
           } else {
@@ -273,7 +279,7 @@
         $target = $(e.target);
         collapse = false;
         if (e.target !== this && !$target.parents('[data-rd-navbar-toggle]').length && (linkedElements = this.getAttribute('data-rd-navbar-toggle'))) {
-          $items = $(this).parents('.rd-navbar').find(linkedElements).add($(this).parents('.rd-navbar')[0]);
+          $items = $(this).parents('body').find(linkedElements).add($(this).parents('.rd-navbar')[0]);
           $items.each(function() {
             if (!collapse) {
               return collapse = (e.target === this || $.contains(this, e.target)) === true;
@@ -302,10 +308,10 @@
           $('[data-rd-navbar-toggle]').not(this).each(function() {
             var deactivateElements;
             if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
-              return $(this).parents('.rd-navbar').find(deactivateElements).add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).removeClass('active');
+              return $(this).parents('body').find(deactivateElements).add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
             }
           });
-          $(this).parents('.rd-navbar').find(linkedElements).add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
+          $(this).parents('body').find(linkedElements).add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
           if (ctx.options.callbacks.onToggleSwitch) {
             ctx.options.callbacks.onToggleSwitch.call(this, ctx);
           }

@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.4
+ * @version      2.1.5
 ###
 
 # Global flags
@@ -217,7 +217,12 @@ isTouch = "ontouchstart" of window
         .find('.rd-navbar-dropdown, .rd-navbar-megamenu')
         .each(() ->
           $this = $(@)
-          if $this.hasClass('rd-navbar-megamenu') then $this.parent().addClass('rd-navbar--has-megamenu') else $this.parent().addClass('rd-navbar--has-dropdown'))
+          rect = @.getBoundingClientRect()
+          if (rect.left + $this.outerWidth()) >= window.innerWidth - 10
+            @.className += ' rd-navbar-open-left'
+          else if (rect.left - $this.outerWidth()) <= 10
+            @.className += ' rd-navbar-open-right'
+          if $this.hasClass('rd-navbar-megamenu') then $this.parent().addClass('rd-navbar--has-megamenu') else $this.parent().addClass('rd-navbar--has-dropdown')) 
         .parents("li")
         .addClass("rd-navbar-submenu")
         .append($('<span/>', {'class' : 'rd-navbar-submenu-toggle'}))
@@ -243,7 +248,7 @@ isTouch = "ontouchstart" of window
       collapse = false
 
       if e.target isnt @ and !$target.parents('[data-rd-navbar-toggle]').length and linkedElements = @.getAttribute('data-rd-navbar-toggle')
-        $items = $(@).parents('.rd-navbar').find(linkedElements).add($(@).parents('.rd-navbar')[0])
+        $items = $(@).parents('body').find(linkedElements).add($(@).parents('.rd-navbar')[0])
         $items.each(()->
           if !collapse
             collapse = (e.target is @ or $.contains(@, e.target)) is true
@@ -262,13 +267,14 @@ isTouch = "ontouchstart" of window
       if linkedElements = @.getAttribute('data-rd-navbar-toggle')
         $('[data-rd-navbar-toggle]').not(@).each(()->
           if deactivateElements = @.getAttribute('data-rd-navbar-toggle')
-            $(@).parents('.rd-navbar')
+            $(@).parents('body')
               .find(deactivateElements)
               .add(@)
-              .add(if $.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 then $(@).parents('.rd-navbar')[0] else false)
+              .add(if $.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 then $(@).parents('body')[0] else false)
               .removeClass('active')
         )
-        $(@).parents('.rd-navbar')
+
+        $(@).parents('body')
           .find(linkedElements)
           .add(@)
           .add(if $.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 then $(@).parents('.rd-navbar')[0] else false)
@@ -285,6 +291,7 @@ isTouch = "ontouchstart" of window
         $this = $(@)
         clearTimeout(timer)
         $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus)
+
         ctx.options.callbacks.onDropdownOver.call(@, ctx) if ctx.options.callbacks.onDropdownOver
 
       return @
