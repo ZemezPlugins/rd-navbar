@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.5
+ * @version      2.1.6
  */
 
 (function() {
@@ -43,11 +43,13 @@
         responsive: {
           0: {
             layout: "rd-navbar-fixed",
+            deviceLayout: "rd-navbar-fixed",
             focusOnHover: false,
             stickUp: false
           },
           992: {
             layout: "rd-navbar-static",
+            deviceLayout: "rd-navbar-static",
             focusOnHover: true,
             stickUp: true
           }
@@ -327,10 +329,36 @@
 
       RDNavbar.prototype.dropdownOver = function(ctx, timer) {
         var $this;
-        if (ctx.focusOnHover && !isTouch) {
+        if (ctx.focusOnHover) {
           $this = $(this);
           clearTimeout(timer);
           $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus);
+          if (ctx.options.callbacks.onDropdownOver) {
+            ctx.options.callbacks.onDropdownOver.call(this, ctx);
+          }
+        }
+        return this;
+      };
+
+
+      /**
+      * Triggers submenu popup to be shown on mouseover
+      * @protected
+       */
+
+      RDNavbar.prototype.dropdownTouch = function(ctx, timer) {
+        var $this, hasFocus;
+        $this = $(this);
+        clearTimeout(timer);
+        if (ctx.focusOnHover) {
+          hasFocus = false;
+          if ($this.hasClass('focus')) {
+            hasFocus = true;
+          }
+          if (!hasFocus) {
+            $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus);
+            return false;
+          }
           if (ctx.options.callbacks.onDropdownOver) {
             ctx.options.callbacks.onDropdownOver.call(this, ctx);
           }
@@ -346,7 +374,7 @@
 
       RDNavbar.prototype.dropdownOut = function(ctx, timer) {
         var $this;
-        if (ctx.focusOnHover && !isTouch) {
+        if (ctx.focusOnHover) {
           $this = $(this);
           $this.one('mouseenter.navbar', function() {
             return clearTimeout(timer);
@@ -539,6 +567,7 @@
           timer = $this.parents(".rd-navbar--is-clone").length ? ctx.cloneTimer : ctx.focusTimer;
           $this.on('mouseleave.navbar', $.proxy(ctx.dropdownOut, this, ctx, timer));
           $this.find('> a').on('mouseenter.navbar', $.proxy(ctx.dropdownOver, this, ctx, timer));
+          $this.find('> a').on('touchstart.navbar', $.proxy(ctx.dropdownTouch, this, ctx, timer));
           $this.find('> .rd-navbar-submenu-toggle').on('click', $.proxy(ctx.dropdownToggle, this, ctx));
           return $this.parents('body').on('click', $.proxy(ctx.dropdownClose, this, ctx));
         });

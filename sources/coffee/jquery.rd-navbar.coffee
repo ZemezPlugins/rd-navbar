@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.5
+ * @version      2.1.6
 ###
 
 # Global flags
@@ -38,10 +38,12 @@ isTouch = "ontouchstart" of window
       responsive:
         0:
           layout: "rd-navbar-fixed"
+          deviceLayout: "rd-navbar-fixed"
           focusOnHover: false
           stickUp: false
         992:
           layout: "rd-navbar-static"
+          deviceLayout: "rd-navbar-static"
           focusOnHover: true
           stickUp: true
       callbacks:
@@ -287,10 +289,29 @@ isTouch = "ontouchstart" of window
     * @protected
     ###
     dropdownOver: (ctx, timer) ->
-      if ctx.focusOnHover and !isTouch
+      if ctx.focusOnHover
         $this = $(@)
         clearTimeout(timer)
         $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus)
+
+        ctx.options.callbacks.onDropdownOver.call(@, ctx) if ctx.options.callbacks.onDropdownOver
+
+      return @
+
+    ###*
+    * Triggers submenu popup to be shown on mouseover
+    * @protected
+    ###
+    dropdownTouch: (ctx, timer) ->
+      $this = $(@)
+      clearTimeout(timer)
+      if ctx.focusOnHover
+        hasFocus = false
+        if $this.hasClass('focus')
+          hasFocus = true
+        if not hasFocus
+          $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus)
+          return false
 
         ctx.options.callbacks.onDropdownOver.call(@, ctx) if ctx.options.callbacks.onDropdownOver
 
@@ -301,7 +322,7 @@ isTouch = "ontouchstart" of window
     * @protected
     ###
     dropdownOut: (ctx, timer) ->
-      if ctx.focusOnHover and !isTouch
+      if ctx.focusOnHover
         $this = $(@);
 
         $this.one('mouseenter.navbar', () ->
@@ -339,6 +360,7 @@ isTouch = "ontouchstart" of window
     * @protected
     ###
     dropdownToggle: (ctx) ->
+
       $(this).toggleClass('opened').siblings().removeClass('opened')
       ctx.options.callbacks.onDropdownToggle.call(@, ctx) if ctx.options.callbacks.onDropdownToggle
       return @
@@ -466,6 +488,7 @@ isTouch = "ontouchstart" of window
 
           $this.on('mouseleave.navbar', $.proxy(ctx.dropdownOut, @, ctx, timer))
           $this.find('> a').on('mouseenter.navbar', $.proxy(ctx.dropdownOver, @, ctx, timer))
+          $this.find('> a').on('touchstart.navbar', $.proxy(ctx.dropdownTouch, @, ctx, timer))
           $this.find('> .rd-navbar-submenu-toggle')
             .on('click', $.proxy(ctx.dropdownToggle, @, ctx))
           $this.parents('body')
