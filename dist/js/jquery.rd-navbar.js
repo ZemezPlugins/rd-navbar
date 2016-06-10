@@ -1,8 +1,9 @@
+
 /**
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.6
+ * @version      2.1.7
  */
 
 (function() {
@@ -116,24 +117,25 @@
         if (isTouch) {
           ctx.$element.addClass("rd-navbar--is-touch");
         }
-        this.setDataAPI(ctx);
+        ctx.setDataAPI(ctx);
         if (ctx.options.domAppend) {
-          this.createNav(ctx);
+          ctx.createNav(ctx);
         }
         if (ctx.options.stickUpClone) {
-          this.createClone(ctx);
+          ctx.createClone(ctx);
         }
-        this.applyHandlers(ctx);
-        this.offset = ctx.$element.offset().top;
-        this.height = ctx.$element.outerHeight();
-        this.loaded = true;
+        ctx.$element.addClass('rd-navbar-original');
+        ctx.applyHandlers(ctx);
+        ctx.offset = ctx.$element.offset().top;
+        ctx.height = ctx.$element.outerHeight();
+        ctx.loaded = true;
         return ctx;
       };
 
 
       /**
-      * Changes {ctx.$element} layout basing on screen resolution
-      * @protected
+       * Changes {ctx.$element} layout basing on screen resolution
+       * @protected
        */
 
       RDNavbar.prototype.resize = function(ctx, e) {
@@ -155,8 +157,8 @@
 
 
       /**
-      * Toggles bar stickup on scroll
-      * @protected
+       * Toggles bar stickup on scroll
+       * @protected
        */
 
       RDNavbar.prototype.stickUp = function(ctx, e) {
@@ -205,8 +207,8 @@
 
 
       /**
-      * Resizes an external wrap of navbar
-      * @protected
+       * Resizes an external wrap of navbar
+       * @protected
        */
 
       RDNavbar.prototype.resizeWrap = function(e) {
@@ -231,8 +233,8 @@
 
 
       /**
-      * Creates additional DOM for navigation functionality
-      * @protected
+       * Creates additional DOM for navigation functionality
+       * @protected
        */
 
       RDNavbar.prototype.createNav = function(ctx) {
@@ -261,19 +263,25 @@
 
 
       /**
-      * Creates navbar clone to stick up
-      * @protected
+       * Creates navbar clone to stick up
+       * @protected
        */
 
       RDNavbar.prototype.createClone = function(ctx) {
         ctx.$clone = ctx.$element.clone().insertAfter(ctx.$element).addClass('rd-navbar--is-clone');
+        $('.rd-navbar--is-clone').find('[data-rd-navbar-toggle]').each(function() {
+          var toggleElement;
+          $(this).addClass('toggle-cloned');
+          toggleElement = this.getAttribute('data-rd-navbar-toggle');
+          return $(this).parents('body').find('.rd-navbar--is-clone').find(toggleElement).addClass('toggle-cloned-elements');
+        });
         return ctx;
       };
 
 
       /**
-      * Closes all toggles on outside click of each item
-      * @protected
+       * Closes all toggles on outside click of each item
+       * @protected
        */
 
       RDNavbar.prototype.closeToggle = function(ctx, e) {
@@ -299,32 +307,44 @@
 
 
       /**
-      * Switches toggle
-      * @protected
+       * Switches toggle
+       * @protected
        */
 
       RDNavbar.prototype.switchToggle = function(ctx, e) {
         var linkedElements;
         e.preventDefault();
-        if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
-          $('[data-rd-navbar-toggle]').not(this).each(function() {
-            var deactivateElements;
-            if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
-              return $(this).parents('body').find(deactivateElements).add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
-            }
-          });
-          $(this).parents('body').find(linkedElements).add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
-          if (ctx.options.callbacks.onToggleSwitch) {
-            ctx.options.callbacks.onToggleSwitch.call(this, ctx);
+        if ($(this).hasClass('toggle-cloned')) {
+          if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
+            $('.rd-navbar--is-clone [data-rd-navbar-toggle]').not(this).each(function() {
+              var deactivateElements;
+              if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
+                return $(this).parents('body').find(deactivateElements + '.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
+              }
+            });
+            $(this).parents('body').find(linkedElements + '.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
           }
+        } else {
+          if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
+            $('.rd-navbar-original [data-rd-navbar-toggle]').not(this).each(function() {
+              var deactivateElements;
+              if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
+                return $(this).parents('body').find(deactivateElements).not('.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
+              }
+            });
+            $(this).parents('body').find(linkedElements).not('.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
+          }
+        }
+        if (ctx.options.callbacks.onToggleSwitch) {
+          ctx.options.callbacks.onToggleSwitch.call(this, ctx);
         }
         return this;
       };
 
 
       /**
-      * Triggers submenu popup to be shown on mouseover
-      * @protected
+       * Triggers submenu popup to be shown on mouseover
+       * @protected
        */
 
       RDNavbar.prototype.dropdownOver = function(ctx, timer) {
@@ -342,8 +362,8 @@
 
 
       /**
-      * Triggers submenu popup to be shown on mouseover
-      * @protected
+       * Triggers submenu popup to be shown on mouseover
+       * @protected
        */
 
       RDNavbar.prototype.dropdownTouch = function(ctx, timer) {
@@ -368,8 +388,8 @@
 
 
       /**
-      * Triggers submenu popop to be hidden on mouseout
-      * @protected
+       * Triggers submenu popop to be hidden on mouseout
+       * @protected
        */
 
       RDNavbar.prototype.dropdownOut = function(ctx, timer) {
@@ -390,8 +410,8 @@
 
 
       /**
-      * Removes a focus from submenu
-      * @protected
+       * Removes a focus from submenu
+       * @protected
        */
 
       RDNavbar.prototype.dropdownUnfocus = function(ctx) {
@@ -403,8 +423,8 @@
 
 
       /**
-      * Closes submenu
-      * @protected
+       * Closes submenu
+       * @protected
        */
 
       RDNavbar.prototype.dropdownClose = function(ctx, e) {
@@ -421,8 +441,8 @@
 
 
       /**
-      * Toggles submenu popup to be shown on trigger click
-      * @protected
+       * Toggles submenu popup to be shown on trigger click
+       * @protected
        */
 
       RDNavbar.prototype.dropdownToggle = function(ctx) {
@@ -435,8 +455,8 @@
 
 
       /**
-      * Scrolls the page to triggered anchor
-      * @protected
+       * Scrolls the page to triggered anchor
+       * @protected
        */
 
       RDNavbar.prototype.goToAnchor = function(ctx, e) {
@@ -456,8 +476,8 @@
 
 
       /**
-      * Highlight an active anchor
-      * @protected
+       * Highlight an active anchor
+       * @protected
        */
 
       RDNavbar.prototype.activateAnchor = function(e) {
@@ -504,8 +524,8 @@
 
 
       /**
-      * Returns current anchor
-      * @protected
+       * Returns current anchor
+       * @protected
        */
 
       RDNavbar.prototype.getAnchor = function() {
@@ -519,8 +539,8 @@
 
 
       /**
-      * Changes current page anchor
-      * @protected
+       * Changes current page anchor
+       * @protected
        */
 
       RDNavbar.prototype.changeAnchor = function(hash) {
@@ -546,8 +566,8 @@
 
 
       /**
-      * Applies all JS event handlers
-      * @protected
+       * Applies all JS event handlers
+       * @protected
        */
 
       RDNavbar.prototype.applyHandlers = function(ctx) {
@@ -579,8 +599,8 @@
 
 
       /**
-      * Switches classes of elements without transition
-      * @protected
+       * Switches classes of elements without transition
+       * @protected
        */
 
       RDNavbar.prototype.switchClass = function(element, before, after) {
@@ -593,8 +613,8 @@
 
 
       /**
-      * Check data attributes and write responsive object
-      * @protected
+       * Check data attributes and write responsive object
+       * @protected
        */
 
       RDNavbar.prototype.setDataAPI = function(ctx) {
@@ -644,8 +664,8 @@
 
 
       /**
-      * Gets specific option of plugin
-      * @protected
+       * Gets specific option of plugin
+       * @protected
        */
 
       RDNavbar.prototype.getOption = function(key) {
@@ -680,8 +700,8 @@
       }
 
       /**
-      * RD Navbar window export
-      * @public
+       * RD Navbar window export
+       * @public
        */
     });
     return window.RDNavbar = RDNavbar;

@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.6
+ * @version      2.1.7
 ###
 
 # Global flags
@@ -101,13 +101,14 @@ isTouch = "ontouchstart" of window
       ctx.$element.addClass("rd-navbar").addClass(ctx.options.layout)
       ctx.$element.addClass("rd-navbar--is-touch") if isTouch
 
-      @.setDataAPI(ctx)
-      @.createNav(ctx) if ctx.options.domAppend
-      @.createClone(ctx) if ctx.options.stickUpClone
-      @.applyHandlers(ctx)
-      @.offset = ctx.$element.offset().top
-      @.height = ctx.$element.outerHeight()
-      @.loaded = true
+      ctx.setDataAPI(ctx)
+      ctx.createNav(ctx) if ctx.options.domAppend
+      ctx.createClone(ctx) if ctx.options.stickUpClone
+      ctx.$element.addClass('rd-navbar-original')
+      ctx.applyHandlers(ctx)
+      ctx.offset = ctx.$element.offset().top
+      ctx.height = ctx.$element.outerHeight()
+      ctx.loaded = true
 
       return ctx
 
@@ -224,7 +225,7 @@ isTouch = "ontouchstart" of window
             @.className += ' rd-navbar-open-left'
           else if (rect.left - $this.outerWidth()) <= 10
             @.className += ' rd-navbar-open-right'
-          if $this.hasClass('rd-navbar-megamenu') then $this.parent().addClass('rd-navbar--has-megamenu') else $this.parent().addClass('rd-navbar--has-dropdown')) 
+          if $this.hasClass('rd-navbar-megamenu') then $this.parent().addClass('rd-navbar--has-megamenu') else $this.parent().addClass('rd-navbar--has-dropdown'))
         .parents("li")
         .addClass("rd-navbar-submenu")
         .append($('<span/>', {'class' : 'rd-navbar-submenu-toggle'}))
@@ -239,6 +240,15 @@ isTouch = "ontouchstart" of window
     ###
     createClone: (ctx) ->
       ctx.$clone = ctx.$element.clone().insertAfter(ctx.$element).addClass('rd-navbar--is-clone')
+
+      $('.rd-navbar--is-clone').find('[data-rd-navbar-toggle]').each(()->
+          $(@).addClass('toggle-cloned')
+          toggleElement = @.getAttribute('data-rd-navbar-toggle')
+          $(@).parents('body')
+          .find('.rd-navbar--is-clone')
+          .find(toggleElement)
+          .addClass('toggle-cloned-elements')
+      )
       return ctx
 
     ###*
@@ -266,23 +276,46 @@ isTouch = "ontouchstart" of window
     ###
     switchToggle: (ctx, e) ->
       e.preventDefault()
-      if linkedElements = @.getAttribute('data-rd-navbar-toggle')
-        $('[data-rd-navbar-toggle]').not(@).each(()->
-          if deactivateElements = @.getAttribute('data-rd-navbar-toggle')
-            $(@).parents('body')
-              .find(deactivateElements)
-              .add(@)
-              .add(if $.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 then $(@).parents('body')[0] else false)
-              .removeClass('active')
-        )
 
-        $(@).parents('body')
-          .find(linkedElements)
-          .add(@)
-          .add(if $.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 then $(@).parents('.rd-navbar')[0] else false)
-          .toggleClass('active')
-        ctx.options.callbacks.onToggleSwitch.call(@, ctx) if ctx.options.callbacks.onToggleSwitch
+      if($(@).hasClass('toggle-cloned'))
+        if linkedElements = @.getAttribute('data-rd-navbar-toggle')
+          $('.rd-navbar--is-clone [data-rd-navbar-toggle]').not(@).each(()->
+            if deactivateElements = @.getAttribute('data-rd-navbar-toggle')
+              $(@).parents('body')
+                .find(deactivateElements+'.toggle-cloned-elements')
+                .add(@)
+                .add(if $.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 then $(@).parents('body')[0] else false)
+                .removeClass('active')
+          )
+
+          $(@).parents('body')
+            .find(linkedElements+'.toggle-cloned-elements')
+            .add(@)
+            .add(if $.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 then $(@).parents('.rd-navbar')[0] else false)
+            .toggleClass('active')
+      else
+        if linkedElements = @.getAttribute('data-rd-navbar-toggle')
+          $('.rd-navbar-original [data-rd-navbar-toggle]').not(@).each(()->
+            if deactivateElements = @.getAttribute('data-rd-navbar-toggle')
+              $(@).parents('body')
+                .find(deactivateElements)
+                .not('.toggle-cloned-elements')
+                .add(@)
+                .add(if $.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 then $(@).parents('body')[0] else false)
+                .removeClass('active')
+          )
+
+          $(@).parents('body')
+            .find(linkedElements)
+            .not('.toggle-cloned-elements')
+            .add(@)
+            .add(if $.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 then $(@).parents('.rd-navbar')[0] else false)
+            .toggleClass('active')
+
+      ctx.options.callbacks.onToggleSwitch.call(@, ctx) if ctx.options.callbacks.onToggleSwitch
       return @
+
+
 
     ###*
     * Triggers submenu popup to be shown on mouseover
@@ -548,7 +581,7 @@ isTouch = "ontouchstart" of window
         # data attribute for responsive autoHeight option
         if @.$element.attr('data' + aliaces[i] + 'auto-height')
           @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
-          @.options.responsive[values[i]]['autoHeight'] = @.$element.attr('data' + aliaces[i] + 'auto-height') is 'true'  
+          @.options.responsive[values[i]]['autoHeight'] = @.$element.attr('data' + aliaces[i] + 'auto-height') is 'true'
         # data attribute for responsive Stick up offset option
         if @.$element.attr('data' + aliaces[i] + 'stick-up-offset')
           @.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
