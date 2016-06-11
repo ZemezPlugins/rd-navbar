@@ -1,4 +1,3 @@
-
 /**
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
@@ -125,6 +124,7 @@
           ctx.createClone(ctx);
         }
         ctx.$element.addClass('rd-navbar-original');
+        ctx.addAdditionalClassToToggles('.rd-navbar-original', 'toggle-original', 'toggle-original-elements');
         ctx.applyHandlers(ctx);
         ctx.offset = ctx.$element.offset().top;
         ctx.height = ctx.$element.outerHeight();
@@ -269,12 +269,7 @@
 
       RDNavbar.prototype.createClone = function(ctx) {
         ctx.$clone = ctx.$element.clone().insertAfter(ctx.$element).addClass('rd-navbar--is-clone');
-        $('.rd-navbar--is-clone').find('[data-rd-navbar-toggle]').each(function() {
-          var toggleElement;
-          $(this).addClass('toggle-cloned');
-          toggleElement = this.getAttribute('data-rd-navbar-toggle');
-          return $(this).parents('body').find('.rd-navbar--is-clone').find(toggleElement).addClass('toggle-cloned-elements');
-        });
+        ctx.addAdditionalClassToToggles('.rd-navbar--is-clone', 'toggle-cloned', 'toggle-cloned-elements');
         return ctx;
       };
 
@@ -285,10 +280,18 @@
        */
 
       RDNavbar.prototype.closeToggle = function(ctx, e) {
-        var $items, $target, collapse, linkedElements;
+        var $items, $target, additionalToggleElClass, additionalToogleClass, collapse, linkedElements;
         $target = $(e.target);
         collapse = false;
-        if (e.target !== this && !$target.parents('[data-rd-navbar-toggle]').length && (linkedElements = this.getAttribute('data-rd-navbar-toggle'))) {
+        linkedElements = this.getAttribute('data-rd-navbar-toggle');
+        if (ctx.options.stickUpClone && ctx.isStuck) {
+          additionalToogleClass = '.toggle-cloned';
+          additionalToggleElClass = '.toggle-cloned-elements';
+        } else {
+          additionalToogleClass = '.toggle-original';
+          additionalToggleElClass = '.toggle-original-elements';
+        }
+        if (e.target !== this && !$target.parents(additionalToogleClass + '[data-rd-navbar-toggle]').length && !$target.parents(additionalToggleElClass).length && linkedElements) {
           $items = $(this).parents('body').find(linkedElements).add($(this).parents('.rd-navbar')[0]);
           $items.each(function() {
             if (!collapse) {
@@ -312,28 +315,23 @@
        */
 
       RDNavbar.prototype.switchToggle = function(ctx, e) {
-        var linkedElements;
+        var additionalToggleElClass, linkedElements, navbarClass;
         e.preventDefault();
         if ($(this).hasClass('toggle-cloned')) {
-          if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
-            $('.rd-navbar--is-clone [data-rd-navbar-toggle]').not(this).each(function() {
-              var deactivateElements;
-              if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
-                return $(this).parents('body').find(deactivateElements + '.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
-              }
-            });
-            $(this).parents('body').find(linkedElements + '.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
-          }
+          navbarClass = '.rd-navbar--is-clone';
+          additionalToggleElClass = '.toggle-cloned-elements';
         } else {
-          if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
-            $('.rd-navbar-original [data-rd-navbar-toggle]').not(this).each(function() {
-              var deactivateElements;
-              if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
-                return $(this).parents('body').find(deactivateElements).not('.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
-              }
-            });
-            $(this).parents('body').find(linkedElements).not('.toggle-cloned-elements').add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
-          }
+          navbarClass = '.rd-navbar-original';
+          additionalToggleElClass = '.toggle-original-elements';
+        }
+        if (linkedElements = this.getAttribute('data-rd-navbar-toggle')) {
+          $(navbarClass + ' [data-rd-navbar-toggle]').not(this).each(function() {
+            var deactivateElements;
+            if (deactivateElements = this.getAttribute('data-rd-navbar-toggle')) {
+              return $(this).parents('body').find(navbarClass + ' ' + deactivateElements + additionalToggleElClass).add(this).add($.inArray('.rd-navbar', deactivateElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('body')[0] : false).removeClass('active');
+            }
+          });
+          $(this).parents('body').find(navbarClass + ' ' + linkedElements + additionalToggleElClass).add(this).add($.inArray('.rd-navbar', linkedElements.split(/\s*,\s*/i)) > -1 ? $(this).parents('.rd-navbar')[0] : false).toggleClass('active');
         }
         if (ctx.options.callbacks.onToggleSwitch) {
           ctx.options.callbacks.onToggleSwitch.call(this, ctx);
@@ -680,6 +678,21 @@
         } else {
           return this.options[key];
         }
+      };
+
+
+      /**
+       * Add additional class to navbar toggles to identify it when navbar is cloned
+       * @protected
+       */
+
+      RDNavbar.prototype.addAdditionalClassToToggles = function(navbarClass, toggleAdditionalClass, toggleElAdditionalClass) {
+        return $(navbarClass).find('[data-rd-navbar-toggle]').each(function() {
+          var toggleElement;
+          $(this).addClass(toggleAdditionalClass);
+          toggleElement = this.getAttribute('data-rd-navbar-toggle');
+          return $(this).parents('body').find(navbarClass).find(toggleElement).addClass(toggleElAdditionalClass);
+        });
       };
 
       return RDNavbar;
