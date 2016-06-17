@@ -158,8 +158,7 @@ isTouch = "ontouchstart" of window
 						)
 						.end()
 						.find('.rd-navbar-submenu').removeClass('opened').removeClass('focus')
-
-					if scrollTop >= threshold and !ctx.isStuck
+					if scrollTop >= threshold and !ctx.isStuck and !ctx.$element.hasClass('rd-navbar-fixed')
 						if e.type is 'resize'
 							ctx.switchClass(targetElement, '', 'rd-navbar--is-stuck')
 						else

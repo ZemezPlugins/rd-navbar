@@ -1,3 +1,4 @@
+
 /**
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
@@ -173,7 +174,7 @@
             ctx.$element.add(ctx.$clone).find('[data-rd-navbar-toggle]').each(function() {
               $.proxy(ctx.closeToggle, this)(ctx, false);
             }).end().find('.rd-navbar-submenu').removeClass('opened').removeClass('focus');
-            if (scrollTop >= threshold && !ctx.isStuck) {
+            if (scrollTop >= threshold && !ctx.isStuck && !ctx.$element.hasClass('rd-navbar-fixed')) {
               if (e.type === 'resize') {
                 ctx.switchClass(targetElement, '', 'rd-navbar--is-stuck');
               } else {
@@ -280,18 +281,20 @@
        */
 
       RDNavbar.prototype.closeToggle = function(ctx, e) {
-        var $items, $target, additionalToggleElClass, additionalToogleClass, collapse, linkedElements;
+        var $items, $target, additionalToggleElClass, additionalToogleClass, collapse, linkedElements, needClose;
         $target = $(e.target);
         collapse = false;
         linkedElements = this.getAttribute('data-rd-navbar-toggle');
         if (ctx.options.stickUpClone && ctx.isStuck) {
           additionalToogleClass = '.toggle-cloned';
           additionalToggleElClass = '.toggle-cloned-elements';
+          needClose = !$target.hasClass('toggle-cloned');
         } else {
           additionalToogleClass = '.toggle-original';
           additionalToggleElClass = '.toggle-original-elements';
+          needClose = !$target.hasClass('toggle-original');
         }
-        if (e.target !== this && !$target.parents(additionalToogleClass + '[data-rd-navbar-toggle]').length && !$target.parents(additionalToggleElClass).length && linkedElements) {
+        if (e.target !== this && !$target.parents(additionalToogleClass + '[data-rd-navbar-toggle]').length && !$target.parents(additionalToggleElClass).length && linkedElements && needClose) {
           $items = $(this).parents('body').find(linkedElements).add($(this).parents('.rd-navbar')[0]);
           $items.each(function() {
             if (!collapse) {
