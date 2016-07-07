@@ -620,8 +620,8 @@
 
       RDNavbar.prototype.setDataAPI = function(ctx) {
         var aliaces, i, j, len, value, values;
-        aliaces = ["-", "-xs-", "-sm-", "-md-", "-lg-"];
-        values = [0, 480, 768, 992, 1200];
+        aliaces = ["-", "-xs-", "-sm-", "-md-", "-lg-", "-xl-"];
+        values = [0, 480, 768, 992, 1200, 1800];
         for (i = j = 0, len = values.length; j < len; i = ++j) {
           value = values[i];
           if (this.$element.attr('data' + aliaces[i] + 'layout')) {

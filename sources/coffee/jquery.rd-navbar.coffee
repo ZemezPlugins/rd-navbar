@@ -547,8 +547,8 @@ isTouch = "ontouchstart" of window
 		* @protected
 		###
 		setDataAPI: (ctx) ->
-			aliaces = ["-","-xs-", "-sm-", "-md-", "-lg-"]
-			values = [0, 480, 768, 992, 1200]
+			aliaces = ["-","-xs-", "-sm-", "-md-", "-lg-", "-xl-"]
+			values = [0, 480, 768, 992, 1200, 1800]
 
 			for value, i in values
 				# data attribute for responsive layout option
