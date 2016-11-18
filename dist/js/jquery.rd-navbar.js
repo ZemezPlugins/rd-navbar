@@ -3,7 +3,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.7
+ * @version      2.1.8
  */
 
 (function() {
@@ -14,18 +14,18 @@
   (function($, document, window) {
 
     /**
-     * Creates a RDNavbar.
-     * @class RDNavbar.
-     * @public
-     * @param {HTMLElement} element - The element to create the RDNavbar for.
-     * @param {Object} [options] - The options
+    	 * Creates a RDNavbar.
+    	 * @class RDNavbar.
+    	 * @public
+    	 * @param {HTMLElement} element - The element to create the RDNavbar for.
+    	 * @param {Object} [options] - The options
      */
     var RDNavbar;
     RDNavbar = (function() {
 
       /**
-       * Default options for RDNavbar.
-       * @protected
+      		 * Default options for RDNavbar.
+      		 * @protected
        */
       RDNavbar.prototype.Defaults = {
         layout: 'rd-navbar-static',
@@ -72,26 +72,26 @@
       function RDNavbar(element, options) {
 
         /**
-         * Current options set
-         * @public
+        			 * Current options set
+        			 * @public
          */
         this.options = $.extend(false, {}, this.Defaults, options);
 
         /**
-         * Plugin element
-         * @public
+        			 * Plugin element
+        			 * @public
          */
         this.$element = $(element);
 
         /**
-         * Plugin element clone
-         * @public
+        			 * Plugin element clone
+        			 * @public
          */
         this.$clone = null;
 
         /**
-         * Additional references
-         * @public
+        			 * Additional references
+        			 * @public
          */
         this.$win = $(window);
         this.$doc = $(document);
@@ -106,8 +106,8 @@
 
 
       /**
-       * Initializes the RDNavbar.
-       * @protected
+      		 * Initializes the RDNavbar.
+      		 * @protected
        */
 
       RDNavbar.prototype.initialize = function() {
@@ -135,8 +135,8 @@
 
 
       /**
-       * Changes {ctx.$element} layout basing on screen resolution
-       * @protected
+      		* Changes {ctx.$element} layout basing on screen resolution
+      		* @protected
        */
 
       RDNavbar.prototype.resize = function(ctx, e) {
@@ -158,13 +158,16 @@
 
 
       /**
-       * Toggles bar stickup on scroll
-       * @protected
+      		* Toggles bar stickup on scroll
+      		* @protected
        */
 
       RDNavbar.prototype.stickUp = function(ctx, e) {
         var scrollTop, stickUp, stickUpOffset, targetElement, threshold;
         stickUp = ctx.getOption("stickUp");
+        if ($('html').hasClass('ios') || ctx.$element.hasClass('rd-navbar-fixed')) {
+          stickUp = false;
+        }
         scrollTop = ctx.$doc.scrollTop();
         targetElement = ctx.$clone != null ? ctx.$clone : ctx.$element;
         stickUpOffset = ctx.getOption('stickUpOffset');
@@ -197,6 +200,7 @@
             }
           }
         } else {
+          ctx.$element.find('.rd-navbar-submenu').removeClass('opened').removeClass('focus');
           if (ctx.isStuck) {
             ctx.switchClass(targetElement, 'rd-navbar--is-stuck', '');
             ctx.isStuck = false;
@@ -208,8 +212,8 @@
 
 
       /**
-       * Resizes an external wrap of navbar
-       * @protected
+      		* Resizes an external wrap of navbar
+      		* @protected
        */
 
       RDNavbar.prototype.resizeWrap = function(e) {
@@ -234,8 +238,8 @@
 
 
       /**
-       * Creates additional DOM for navigation functionality
-       * @protected
+      		* Creates additional DOM for navigation functionality
+      		* @protected
        */
 
       RDNavbar.prototype.createNav = function(ctx) {
@@ -253,9 +257,8 @@
           } else {
             return $this.parent().addClass('rd-navbar--has-dropdown');
           }
-        }).parents("li").addClass("rd-navbar-submenu").append($('<span/>', {
-          'class': 'rd-navbar-submenu-toggle'
-        }));
+        }).parents("li").addClass("rd-navbar-submenu");
+        $('<span class="rd-navbar-submenu-toggle"></span>').insertAfter('.rd-navbar-nav li.rd-navbar-submenu > a');
         if (ctx.options.callbacks.onDomAppend) {
           ctx.options.callbacks.onDomAppend.call(this);
         }
@@ -264,8 +267,8 @@
 
 
       /**
-       * Creates navbar clone to stick up
-       * @protected
+      		* Creates navbar clone to stick up
+      		* @protected
        */
 
       RDNavbar.prototype.createClone = function(ctx) {
@@ -276,8 +279,8 @@
 
 
       /**
-       * Closes all toggles on outside click of each item
-       * @protected
+      		* Closes all toggles on outside click of each item
+      		* @protected
        */
 
       RDNavbar.prototype.closeToggle = function(ctx, e) {
@@ -313,8 +316,8 @@
 
 
       /**
-       * Switches toggle
-       * @protected
+      		* Switches toggle
+      		* @protected
        */
 
       RDNavbar.prototype.switchToggle = function(ctx, e) {
@@ -344,8 +347,8 @@
 
 
       /**
-       * Triggers submenu popup to be shown on mouseover
-       * @protected
+      		* Triggers submenu popup to be shown on mouseover
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownOver = function(ctx, timer) {
@@ -363,8 +366,8 @@
 
 
       /**
-       * Triggers submenu popup to be shown on mouseover
-       * @protected
+      		* Triggers submenu popup to be shown on mouseover
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownTouch = function(ctx, timer) {
@@ -389,8 +392,8 @@
 
 
       /**
-       * Triggers submenu popop to be hidden on mouseout
-       * @protected
+      		* Triggers submenu popop to be hidden on mouseout
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownOut = function(ctx, timer) {
@@ -411,8 +414,8 @@
 
 
       /**
-       * Removes a focus from submenu
-       * @protected
+      		* Removes a focus from submenu
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownUnfocus = function(ctx) {
@@ -424,8 +427,8 @@
 
 
       /**
-       * Closes submenu
-       * @protected
+      		* Closes submenu
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownClose = function(ctx, e) {
@@ -442,8 +445,8 @@
 
 
       /**
-       * Toggles submenu popup to be shown on trigger click
-       * @protected
+      		* Toggles submenu popup to be shown on trigger click
+      		* @protected
        */
 
       RDNavbar.prototype.dropdownToggle = function(ctx) {
@@ -456,8 +459,8 @@
 
 
       /**
-       * Scrolls the page to triggered anchor
-       * @protected
+      		* Scrolls the page to triggered anchor
+      		* @protected
        */
 
       RDNavbar.prototype.goToAnchor = function(ctx, e) {
@@ -477,8 +480,8 @@
 
 
       /**
-       * Highlight an active anchor
-       * @protected
+      		* Highlight an active anchor
+      		* @protected
        */
 
       RDNavbar.prototype.activateAnchor = function(e) {
@@ -525,8 +528,8 @@
 
 
       /**
-       * Returns current anchor
-       * @protected
+      		* Returns current anchor
+      		* @protected
        */
 
       RDNavbar.prototype.getAnchor = function() {
@@ -540,8 +543,8 @@
 
 
       /**
-       * Changes current page anchor
-       * @protected
+      		* Changes current page anchor
+      		* @protected
        */
 
       RDNavbar.prototype.changeAnchor = function(hash) {
@@ -567,8 +570,8 @@
 
 
       /**
-       * Applies all JS event handlers
-       * @protected
+      		* Applies all JS event handlers
+      		* @protected
        */
 
       RDNavbar.prototype.applyHandlers = function(ctx) {
@@ -600,8 +603,8 @@
 
 
       /**
-       * Switches classes of elements without transition
-       * @protected
+      		* Switches classes of elements without transition
+      		* @protected
        */
 
       RDNavbar.prototype.switchClass = function(element, before, after) {
@@ -614,8 +617,8 @@
 
 
       /**
-       * Check data attributes and write responsive object
-       * @protected
+      		* Check data attributes and write responsive object
+      		* @protected
        */
 
       RDNavbar.prototype.setDataAPI = function(ctx) {
@@ -642,12 +645,6 @@
             }
             this.options.responsive[values[i]]['focusOnHover'] = this.$element.attr('data' + aliaces[i] + 'hover-on') === 'true';
           }
-          if (this.$element.attr('data' + aliaces[i] + 'stick-up')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]]['stickUp'] = this.$element.attr('data' + aliaces[i] + 'stick-up') === 'true';
-          }
           if (this.$element.attr('data' + aliaces[i] + 'auto-height')) {
             if (!this.options.responsive[values[i]]) {
               this.options.responsive[values[i]] = {};
@@ -665,8 +662,8 @@
 
 
       /**
-       * Gets specific option of plugin
-       * @protected
+      		* Gets specific option of plugin
+      		* @protected
        */
 
       RDNavbar.prototype.getOption = function(key) {
@@ -685,8 +682,8 @@
 
 
       /**
-       * Add additional class to navbar toggles to identify it when navbar is cloned
-       * @protected
+      		* Add additional class to navbar toggles to identify it when navbar is cloned
+      		* @protected
        */
 
       RDNavbar.prototype.addAdditionalClassToToggles = function(navbarClass, toggleAdditionalClass, toggleElAdditionalClass) {
@@ -703,8 +700,8 @@
     })();
 
     /**
-     * The jQuery Plugin for the RD Navbar
-     * @public
+    	 * The jQuery Plugin for the RD Navbar
+    	 * @public
      */
     $.fn.extend({
       RDNavbar: function(options) {
@@ -716,8 +713,8 @@
       }
 
       /**
-       * RD Navbar window export
-       * @public
+      	* RD Navbar window export
+      	* @public
        */
     });
     return window.RDNavbar = RDNavbar;
@@ -739,3 +736,4 @@
   }
 
 }).call(this);
+

@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.7
+ * @version      2.1.8
 ###
 
 # Global flags
@@ -142,10 +142,15 @@ isTouch = "ontouchstart" of window
 		###
 		stickUp: (ctx, e) ->
 			stickUp = ctx.getOption("stickUp")
+			# disable stickUp on ios devices, because when we focus on input in stuck menu,
+			# ios keyboard opened and, scrolling to top, navbar lose class '--is-stuck'
+			# and all toggled elements closed
+			if($('html').hasClass('ios') or ctx.$element.hasClass('rd-navbar-fixed')) then stickUp = false
 			scrollTop = ctx.$doc.scrollTop()
 			targetElement = if ctx.$clone? then ctx.$clone else ctx.$element
 			stickUpOffset = ctx.getOption('stickUpOffset')
 			threshold = (if typeof stickUpOffset is 'string' then (if stickUpOffset.indexOf('%') > 0 then parseFloat(stickUpOffset) * ctx.height / 100 else parseFloat(stickUpOffset)) else stickUpOffset)
+
 
 			if stickUp
 				if (scrollTop >= threshold and !ctx.isStuck) || (scrollTop < threshold and ctx.isStuck)
@@ -177,6 +182,7 @@ isTouch = "ontouchstart" of window
 						ctx.isStuck = false
 						ctx.options.callbacks.onUnstuck.call(ctx) if ctx.options.callbacks.onUnstuck
 			else
+				ctx.$element.find('.rd-navbar-submenu').removeClass('opened').removeClass('focus')
 				if ctx.isStuck
 					ctx.switchClass(targetElement, 'rd-navbar--is-stuck', '')
 					ctx.isStuck = false
@@ -228,7 +234,7 @@ isTouch = "ontouchstart" of window
 					if $this.hasClass('rd-navbar-megamenu') then $this.parent().addClass('rd-navbar--has-megamenu') else $this.parent().addClass('rd-navbar--has-dropdown'))
 				.parents("li")
 				.addClass("rd-navbar-submenu")
-				.append($('<span/>', {'class' : 'rd-navbar-submenu-toggle'}))
+			$('<span class="rd-navbar-submenu-toggle"></span>').insertAfter('.rd-navbar-nav li.rd-navbar-submenu > a')
 
 			ctx.options.callbacks.onDomAppend.call(@) if ctx.options.callbacks.onDomAppend
 
@@ -564,9 +570,9 @@ isTouch = "ontouchstart" of window
 					@.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
 					@.options.responsive[values[i]]['focusOnHover'] = @.$element.attr('data' + aliaces[i] + 'hover-on') is 'true'
 				# data attribute for responsive stickUp option
-				if @.$element.attr('data' + aliaces[i] + 'stick-up')
-					@.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
-					@.options.responsive[values[i]]['stickUp'] = @.$element.attr('data' + aliaces[i] + 'stick-up') is 'true'
+#				if @.$element.attr('data' + aliaces[i] + 'stick-up')
+#					@.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
+#					@.options.responsive[values[i]]['stickUp'] = @.$element.attr('data' + aliaces[i] + 'stick-up') is 'true'
 				# data attribute for responsive autoHeight option
 				if @.$element.attr('data' + aliaces[i] + 'auto-height')
 					@.options.responsive[values[i]] = {} if not @.options.responsive[values[i]]
