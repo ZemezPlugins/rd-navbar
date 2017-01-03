@@ -1,0 +1,24 @@
+{
+  "name": "rd-navbar",
+  "version": "1.0.0",
+  "description": "Powerfull navigation for your site",
+  "keywords": [
+    "navbar",
+    "navigation",
+    "responsive"
+  ],
+  "author": "TemplatemonsterPlugins",
+  "license": "(CC-BY-SA-4.0 OR GPL-3.0)",
+  "homepage": "https://github.com/TemplatemonsterPlugins/rd-navbar#readme",
+  "bugs": {
+    "url": "https://github.com/TemplatemonsterPlugins/rd-navbar/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TemplatemonsterPlugins/rd-navbar.git"
+  },
+  "main": "./dist/js/jquery.rd-navbar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
