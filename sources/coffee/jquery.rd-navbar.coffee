@@ -357,10 +357,14 @@ isTouch = "ontouchstart" of window
 					clearTimeout(timer)
 				)
 
-				clearTimeout(timer)
-				timer = setTimeout($.proxy(ctx.dropdownUnfocus, @, ctx), ctx.options.focusOnHoverTimeout)
+				if ctx.options.callbacks.onDropdownOut
+					callbackResault = ctx.options.callbacks.onDropdownOut.call(@, ctx)
 
-				ctx.options.callbacks.onDropdownOut.call(@, ctx) if ctx.options.callbacks.onDropdownOut
+				clearTimeout(timer)
+				
+				if callbackResault
+					timer = setTimeout($.proxy(ctx.dropdownUnfocus, @, ctx), ctx.options.focusOnHoverTimeout)
+
 			return @
 
 		###*
