@@ -3,7 +3,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.1.9
+ * @version      2.2.0
  */
 (function() {
   var isTouch;
@@ -355,10 +355,13 @@
         if (ctx.focusOnHover) {
           $this = $(this);
           clearTimeout(timer);
-          $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus);
           if (ctx.options.callbacks.onDropdownOver) {
-            ctx.options.callbacks.onDropdownOver.call(this, ctx);
+            if (!ctx.options.callbacks.onDropdownOver.call(this, ctx)){
+              return this;
+            }
           }
+
+          $this.addClass('focus').siblings().removeClass('opened').each(ctx.dropdownUnfocus);
         }
         return this;
       };
@@ -404,13 +407,11 @@
           });
 
           if (ctx.options.callbacks.onDropdownOut) {
-            var callbackResault = ctx.options.callbacks.onDropdownOut.call(this, ctx);
+            ctx.options.callbacks.onDropdownOut.call(this, ctx);
           }
           clearTimeout(timer);
 
-          if (callbackResault) {
-            timer = setTimeout($.proxy(ctx.dropdownUnfocus, this, ctx), ctx.options.focusOnHoverTimeout);
-          }
+          timer = setTimeout($.proxy(ctx.dropdownUnfocus, this, ctx), ctx.options.focusOnHoverTimeout);
         }
         return this;
       };
