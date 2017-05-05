@@ -1,9 +1,8 @@
-
 /**
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.2.0
+ * @version      2.2.1
  */
 (function() {
   var isTouch;
@@ -246,11 +245,6 @@
           var $this, rect;
           $this = $(this);
           rect = this.getBoundingClientRect();
-          if ((rect.left + $this.outerWidth()) >= window.innerWidth - 10) {
-            this.className += ' rd-navbar-open-left';
-          } else if ((rect.left - $this.outerWidth()) <= 10) {
-            this.className += ' rd-navbar-open-right';
-          }
           if ($this.hasClass('rd-navbar-megamenu')) {
             return $this.parent().addClass('rd-navbar--has-megamenu');
           } else {
@@ -602,6 +596,18 @@
         ctx.$element.add(ctx.$clone).find('.rd-navbar-nav a[href^="#"]').each(function() {
           return $(this).on('click', $.proxy(ctx.goToAnchor, this, ctx));
         });
+
+        ctx.$element.find('.rd-navbar-dropdown, .rd-navbar-megamenu').each(function() {
+          var $this, rect;
+          $this = $(this);
+          rect = this.getBoundingClientRect();
+          if ((rect.left + $this.outerWidth()) >= window.innerWidth - 10) {
+            this.className += ' rd-navbar-open-left';
+          } else if ((rect.left - $this.outerWidth()) <= 10) {
+            this.className += ' rd-navbar-open-right';
+          }
+        });
+
         return ctx;
       };
 
