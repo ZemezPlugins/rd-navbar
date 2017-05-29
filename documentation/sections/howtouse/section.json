@@ -2,55 +2,64 @@
 	"id":"howtouse",
 	"translations":
 	{
+		"en": "How to use the script?",
 		"ru":"Как использовать скрипт?"
 	},
   "articles": [
 	  {
 		  "id": "general",
 		  "translations": {
-			  "ru": "Общие принципы"
+	  		 	"en": "General principles",
+			 	"ru": "Общие принципы"
 		  }
 	  },
 	  {
 		  "id": "classes",
 		  "translations": {
-			  "ru": "Карта классов"
+		  		"en": "Class Map",
+			  	"ru": "Карта классов"
 		  }
 	  },
 	  {
 		  "id": "layouts",
 		  "translations": {
-			  "ru": "Настройка лейаутов"
+		  		"en": "Adjustment of the layouts",
+			 	"ru": "Настройка лейаутов"
 		  }
 	  },
 	  {
 		  "id": "stickup",
 		  "translations": {
-			  "ru": "Настройка прилипающей панели"
+		  		"en": "Sticky panel setting",
+			  	"ru": "Настройка прилипающей панели"
 		  }
 	  },
 	  {
 		  "id": "navigation",
 		  "translations": {
-			  "ru": "Настройка навигации"
+		  		"en": "Navigation setting",
+			  	"ru": "Настройка навигации"
 		  }
 	  },
 	  {
 		  "id": "toggles",
 		  "translations": {
-			  "ru": "Настройка переключателей (тоглов)"
+		  		"en": "Setting switches (toggles)",
+			  	"ru": "Настройка переключателей (тоглов)"
 		  }
 	  },
 	  {
 		  "id": "links",
 		  "translations": {
-			  "ru": "Настройка линковщика"
+		  		"en": "Linker Adjustment",
+			  	"ru": "Настройка линковщика"
 		  }
 	  },
 	  {
 		  "id": "onepage",
 		  "translations": {
-			  "ru": "Настройка одностраничной навигации"
+		  		"en": "Single page navigation adjustment",
+			  	"ru": "Настройка одностраничной навигации"
 		  }
 	  }
   ]

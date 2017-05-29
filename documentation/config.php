@@ -13,7 +13,7 @@ $product_name = "RD Navbar";
 $product_desc = "Documentation";
 $doc_title = $product_name . " " . $product_desc;
 
-$lang = 'ru';
+$lang = 'en';
 if (isset($_GET['lang'])) {
 	$lang = $_GET['lang'];
 }

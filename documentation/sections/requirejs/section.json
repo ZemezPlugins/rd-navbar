@@ -2,6 +2,7 @@
 	"id":"requirejs",
 	"translations":
 	{
+		"en":"Integration with Require.js",
 		"ru":"Интеграция с Require.js"
 	},
   "articles": {
