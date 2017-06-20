@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.2.1
+ * @version      2.2.2
  */
 (function() {
   var isTouch;
@@ -176,15 +176,20 @@
               $.proxy(ctx.closeToggle, this)(ctx, false);
             }).end().find('.rd-navbar-submenu').removeClass('opened').removeClass('focus');
             if (scrollTop >= threshold && !ctx.isStuck && !ctx.$element.hasClass('rd-navbar-fixed')) {
-              if (e.type === 'resize') {
-                ctx.switchClass(targetElement, '', 'rd-navbar--is-stuck');
-              } else {
-                targetElement.addClass('rd-navbar--is-stuck');
-              }
-              ctx.isStuck = true;
               if (ctx.options.callbacks.onStuck) {
                 ctx.options.callbacks.onStuck.call(ctx);
               }
+
+
+              setTimeout(function(){
+                if (e.type === 'resize') {
+                  ctx.switchClass(targetElement, '', 'rd-navbar--is-stuck');
+                } else {
+                  targetElement.addClass('rd-navbar--is-stuck');
+                }
+                ctx.isStuck = true;
+              }, navigator.platform.match(/(Mac)/i) ? 10 : 0);
+
             } else {
               if (e.type === 'resize') {
                 ctx.switchClass(targetElement, 'rd-navbar--is-stuck', '');
