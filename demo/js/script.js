@@ -289,7 +289,7 @@ function isIE() {
 (function ($) {
     var o = $('.rd-navbar');
     if (o.length > 0) {
-        include('../dist/js/jquery.rd-navbar.min.js'); 
+        include('../dist/js/jquery.rd-navbar.js');
 
         $(document).ready(function () {
             o.RDNavbar({

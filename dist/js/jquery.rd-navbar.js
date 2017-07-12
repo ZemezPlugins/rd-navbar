@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.2.2
+ * @version      2.2.4
  */
 (function() {
   var isTouch;
@@ -35,6 +35,7 @@
         stickUp: true,
         stickUpClone: true,
         stickUpOffset: '100%',
+        anchorNav: true,
         anchorNavSpeed: 400,
         anchorNavOffset: 0,
         anchorNavEasing: 'swing',
@@ -470,6 +471,11 @@
         var $anchor, hash;
         hash = this.hash;
         $anchor = $(hash);
+
+        if (!ctx.getOption('anchorNav')){
+          return false;
+        }
+
         if ($anchor.length) {
           e.preventDefault();
           $('html, body').stop().animate({
@@ -494,6 +500,11 @@
         winHeight = ctx.$win.height();
         docHeight = ctx.$doc.height();
         navOffset = ctx.getOption('anchorNavOffset');
+
+        if (!ctx.options.anchorNav){
+          return false;
+        }
+
         if (scrollTop + winHeight > docHeight - 50) {
           $anchor = $('[data-type="anchor"]').last();
           if ($anchor.length) {
