@@ -2,7 +2,7 @@
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
  * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
- * @version      2.2.4
+ * @version      2.2.5
  */
 (function() {
   var isTouch;
@@ -74,7 +74,7 @@
          * Current options set
          * @public
          */
-        this.options = $.extend(false, {}, this.Defaults, options);
+        this.options = $.extend(true, {}, this.Defaults, options);
 
         /**
          * Plugin element
@@ -116,7 +116,6 @@
         if (isTouch) {
           ctx.$element.addClass("rd-navbar--is-touch");
         }
-        ctx.setDataAPI(ctx);
         if (ctx.options.domAppend) {
           ctx.createNav(ctx);
         }
@@ -639,51 +638,6 @@
         obj.addClass('rd-navbar--no-transition').removeClass(before).addClass(after);
         obj[0].offsetHeight;
         return obj.removeClass('rd-navbar--no-transition');
-      };
-
-
-      /**
-       * Check data attributes and write responsive object
-       * @protected
-       */
-
-      RDNavbar.prototype.setDataAPI = function(ctx) {
-        var aliaces, i, j, len, value, values;
-        aliaces = ["-", "-xs-", "-sm-", "-md-", "-lg-", "-xl-"];
-        values = [0, 480, 768, 992, 1200, 1800];
-        for (i = j = 0, len = values.length; j < len; i = ++j) {
-          value = values[i];
-          if (this.$element.attr('data' + aliaces[i] + 'layout')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]].layout = this.$element.attr('data' + aliaces[i] + 'layout');
-          }
-          if (this.$element.attr('data' + aliaces[i] + 'device-layout')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]]['deviceLayout'] = this.$element.attr('data' + aliaces[i] + 'device-layout');
-          }
-          if (this.$element.attr('data' + aliaces[i] + 'hover-on')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]]['focusOnHover'] = this.$element.attr('data' + aliaces[i] + 'hover-on') === 'true';
-          }
-          if (this.$element.attr('data' + aliaces[i] + 'auto-height')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]]['autoHeight'] = this.$element.attr('data' + aliaces[i] + 'auto-height') === 'true';
-          }
-          if (this.$element.attr('data' + aliaces[i] + 'stick-up-offset')) {
-            if (!this.options.responsive[values[i]]) {
-              this.options.responsive[values[i]] = {};
-            }
-            this.options.responsive[values[i]]['stickUpOffset'] = this.$element.attr('data' + aliaces[i] + 'stick-up-offset');
-          }
-        }
       };
 
 
