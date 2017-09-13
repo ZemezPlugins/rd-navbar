@@ -4,7 +4,9 @@ Powerful navigation tool. Create your own unique navigations depending on screen
 
 Check out this [Demo](http://cms.devoffice.com/coding-dev/rd-navbar/demo/) to see it in action!
 
-Extended documentation is available here: [Documentation](http://cms.devoffice.com/coding-dev/rd-navbar/documentation/)
+Extended documentation in rusian is available here: [Documentation](http://cms.devoffice.com/coding-dev/rd-navbar/documentation/)
+
+Some english docs can be found here: [English Documentation](https://www.templatemonster.com/help/quick-start-guide/website-templates/v1-3/index.php?lang=en&section=extensions#rd-navbar)
 
 ## Concept
 First of all, you need to remember. RD Navbar - is a navigation builder. It provides all functionality that you need to
