@@ -1,7 +1,6 @@
 /**
  * @module       RD Navbar
  * @author       Evgeniy Gusarov
- * @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
  * @version      2.2.5
  */
 (function() {

@@ -1,12 +1,7 @@
 @charset "UTF-8";
 /*
 * @subsection   RD Navbar
-*
 * @description  Describes style declarations for RD Navbar extension
-*
-* @author       Evgeniy Gusarov
-* @link         https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
-* @version      2.1.6
 */
 .rd-navbar-wrap, .rd-navbar-static.rd-navbar--is-clone, .rd-navbar-static .rd-navbar-dropdown,
 .rd-navbar-static .rd-navbar-megamenu, .rd-navbar-fixed .rd-navbar-nav-wrap, .rd-navbar-fixed .rd-navbar-submenu, .rd-navbar-fixed .rd-navbar-submenu-toggle, .rd-navbar-cart, .rd-navbar-static .rd-navbar-cart-buy, .rd-navbar-fixed .rd-navbar-cart-floating, .rd-navbar-fixed .rd-navbar-cart-floating:before, .rd-navbar-fixed .rd-navbar-cart-floating .rd-navbar-cart-buy, .rd-navbar-fixed .rd-navbar-search .form-group, .rd-navbar-fixed .rd-navbar-collapse, .rd-navbar-fixed .rd-navbar-collapse:before {
