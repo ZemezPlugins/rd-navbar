@@ -524,7 +524,10 @@
             link = links[i];
             $link = $(link);
             hash = $link.attr('href');
-            $anchor = $(hash);
+            // @CHANGE LDR Replace line to fix js error with jquery 3.3.1: $('#') is not allowed.
+            // $anchor = $(hash);
+            if (hash != '#') $anchor = $(hash);
+            else $anchor = '';
             if ($anchor.length) {
               if ($anchor.offset().top + navOffset <= scrollTop && $anchor.offset().top + $anchor.outerHeight() > scrollTop) {
                 $link.parent().addClass('active').siblings().removeClass('active');
